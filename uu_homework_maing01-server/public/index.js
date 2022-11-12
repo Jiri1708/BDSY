@@ -799,7 +799,7 @@ module.exports = JSON.parse('{"appName":"Application uuHomework","About":{"heade
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/index/" + chunkId + "-" + {"routes_about_js":"c66393ed5958687ad89e","routes_init-app-workspace_js":"668dea5064393daf2f13","routes_control-panel_js":"977de90a2660d19ad46b","lsi_cs_json":"8f31d2ff26ec753d0137"}[chunkId] + ".js";
+/******/ 			return "chunks/index/" + chunkId + "-" + {"routes_about_js":"e096302ccb261a72df89","routes_init-app-workspace_js":"abc3d8b1326b55d25a46","routes_control-panel_js":"28eaa84c2dd3e7f4d758","lsi_cs_json":"8f31d2ff26ec753d0137"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -819,7 +819,7 @@ module.exports = JSON.parse('{"appName":"Application uuHomework","About":{"heade
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
-/******/ 		__webpack_require__.h = function() { return "05c7e9bbe80629647466"; }
+/******/ 		__webpack_require__.h = function() { return "b697eded2a201dec8fe6"; }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/harmony module decorator */
