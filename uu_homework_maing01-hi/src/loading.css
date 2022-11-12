@@ -1,0 +1,56 @@
+.uu-app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  color: #2196f3;
+  line-height: 1.15;
+}
+.uu-app-loading.uu-app-loading {
+  display: flex !important;
+}
+
+.uu-app-loading-svg-container {
+  position: relative;
+}
+
+.uu-app-loading-svg {
+  height: 256px;
+  vertical-align: middle;
+  animation: uu-app-loading 1s infinite linear;
+}
+
+.uu-app-loading-name {
+  color: #212121;
+  font-size: 24px;
+  text-align: center;
+  height: 0; /* so that it doesn't affect vertical positioning */
+}
+.uu-app-loading-name:before {
+  content: "";
+  display: block;
+  margin-top: 16px;
+}
+
+@media screen and (min-width: 481px) {
+  .uu-app-loading-name {
+    font-size: 32px;
+  }
+  .uu-app-loading-name:before {
+    margin-top: 24px;
+  }
+}
+
+@keyframes uu-app-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

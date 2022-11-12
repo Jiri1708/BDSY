@@ -1,0 +1,62 @@
+{
+  "primary": "primary",
+  "uuSubAppDataStore": {
+    "primary": {
+      "type": "uuAppObjectStore",
+      "realization": "MongoDB",
+      "schemaMap": {
+        "homeworkMain": {
+          "realization": "dao/HomeworkMainMongo"
+        },
+        "list": {
+          "realization": "dao/ListMongo",
+          "maxNoi": 1024
+        },
+        "sysAuditLogRecord": {
+          "realization": "uu_appg01_auditlog:dao/SysAuditLogRecordMongo"
+        },
+        "sysAuditLogConfig": {
+          "realization": "uu_appg01_auditlog:dao/SysAuditLogConfigMongo"
+        },
+        "sysUuSubAppInstance": {
+          "realization": "uu_appg01_workspace:dao/SysAppInstanceMongo",
+          "maxNoi": 1
+        },
+        "sysUuAppWorkspace": {
+          "realization": "uu_appg01_workspace:dao/SysAppWorkspaceMongo",
+          "maxNoi": 1
+        },
+        "sysProfile": {
+          "realization": "uu_appg01_workspace:dao/SysProfileMongo",
+          "maxNoi": 32
+        },
+        "sysPermission": {
+          "realization": "uu_appg01_workspace:dao/SysPermissionMongo",
+          "maxNoi": 1000
+        },
+        "sysUuAppDataStoreStats": {
+          "realization": "uu_appg01_workspace:dao/SysAppDataStoreStatsMongo"
+        },
+        "sysUuAppSecret": {
+          "realization": "uu_appg01_workspace:dao/SysAppSecretStoreMongo",
+          "maxNoi": 1000000
+        },
+        "sysImportMapping": {
+          "realization": "uu_appg01_workspace:dao/SysImportMappingMongo"
+        },
+        "sysQosConfig": {
+          "realization": "uu_appqosg01:dao/SysQosConfigMongo",
+          "maxNoi": 1
+        },
+        "sysProductInfo": {
+          "realization": "uu_apprepresentationg01:dao/SysProductInfoMongo",
+          "maxNoi": 1
+        },
+        "sysProductLogo": {
+          "realization": "uu_apprepresentationg01:dao/SysProductLogoMongo",
+          "maxNoi": 512
+        }
+      }
+    }
+  }
+}

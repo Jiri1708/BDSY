@@ -1,0 +1,96 @@
+{
+  "{vendor}-{uuApp}-{uuSubApp}": {
+    "useCaseMap": {
+      "sys/uuAppWorkspace/init": {
+        "realization": "api/controllers/HomeworkMainController.init",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "sys/uuAppWorkspace/load": {
+        "realization": "api/controllers/HomeworkMainController.load",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "sys/uuAppWorkspace/loadBasicData": {
+        "realization": "api/controllers/HomeworkMainController.loadBasicData",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "defaultUve": {
+        "realization": "index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "sys/uuAppWorkspace/initUve": {
+        "realization": "index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "list/get": {
+        "realization": "api/controllers/ListController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "list/create": {
+        "realization": "api/controllers/ListController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "list/getProducts": {
+        "realization": "api/controllers/ListController.getProducts",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "list/update": {
+        "realization": "api/controllers/ListController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "list/delete": {
+        "realization": "api/controllers/ListController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "list/linkProduct": {
+        "realization": "api/controllers/ListController.linkProduct",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "list/updateProduct": {
+        "realization": "api/controllers/ListController.updateProduct",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "product/create": {
+        "realization": "api/controllers/ProductController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "product/get": {
+        "realization": "api/controllers/ProductController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "product/update": {
+        "realization": "api/controllers/ProductController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "identity/assignRole": {
+        "realization": "api/controllers/IdentityController.assignRole",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "identity/removeRole": {
+        "realization": "api/controllers/IdentityController.removeRole",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "identity/getRoles": {
+        "realization": "api/controllers/IdentityController.getRoles",
+        "httpMethod": "GET",
+        "type": "CMD"
+      }
+    }
+  }
+}

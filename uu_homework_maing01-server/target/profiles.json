@@ -1,0 +1,505 @@
+{
+  "{asid}": {
+    "profileList": ["AsidAuthorities", "AsidExecutives", "AsidLicenseOwner", "Public", "Contributor", "Owner", "AsidAuditors", "SystemIdentities"],
+    "useCaseMap": {
+      "sys/uuSubAppInstance/init": {
+        "sysStateList": ["created"],
+        "profileList": ["AsidLicenseOwner", "Public"]
+      },
+      "sys/uuSubAppInstance/upgrade": {
+        "sysStateList": ["created", "restricted"],
+        "profileList": ["AsidLicenseOwner"]
+      },
+      "sys/uuSubAppInstance/upgradeCleanup": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidLicenseOwner", "AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/get": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuSubAppInstance/set": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/profile/get": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuSubAppInstance/profile/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/profile/list": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuSubAppInstance/profile/update": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/permission/create": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidLicenseOwner", "AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/permission/delete": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/permission/list": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuSubAppInstance/setActiveSysState": {
+        "sysStateList": ["restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/setRestrictedSysState": {
+        "sysStateList": ["active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppWorkspace/close": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppWorkspace/suspend": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppWorkspace/resume": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppWorkspace/create": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "Public"]
+      },
+      "sys/uuAppWorkspace/assign": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppWorkspace/delete": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppWorkspace/list": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppDataStore/stats/privilegedCalculate": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuAppDataStore/stats/list": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/dump": {
+        "sysStateList": ["restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/restore": {
+        "sysStateList": ["restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/setAuthorizationStrategy": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppDataStore/drop": {
+        "sysStateList": ["restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppWorkspace/profile/update": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/appClientToken/listKeys": {
+        "sysStateList": ["created", "active", "restricted"],
+        "profileList": ["Public"]
+      },
+      "sys/appClientToken/initKeys": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppSecretStore/rotateMasterKey": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuAppSecretStore/getStatus": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/logRecord/getTransferStatus": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/logRecord/transfer": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/logRecord/privilegedList": {
+        "sysStateList": ["active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/logRecord/privilegedDelete": {
+        "sysStateList": ["active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "oidc/initOidcClient": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["AsidLicenseOwner", "AsidAuthorities"]
+      },
+      "oidc/setAllowedRedirects": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "oidc/getAllowedRedirects": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "oidc/getClientId": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/introspect": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/callback": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/refresh": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/grantCallToken": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/extendSession": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "oidc/logout": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "sys/getHealth": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "sys/getUseCases": {
+        "sysStateList": ["created", "restricted", "active"],
+        "profileList": ["Public"]
+      },
+      "sys/getConfiguration": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/getEnvironment": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/getStatistics": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/resetStatistics": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/generateDiagnosticReport": {
+        "sysStateList": ["restricted", "active"],
+        "profileList": ["AsidAuthorities"]
+      },
+      "sys/uuSubAppInstance/qos/setConfiguration": {
+        "sysStateList": ["created", "active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/qos/getConfiguration": {
+        "sysStateList": ["created", "active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuSubAppInstance/productInfo/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/productInfo/get": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Public"]
+      },
+      "getProductInfo": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Public"]
+      },
+      "sys/uuSubAppInstance/productLogo/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AsidAuthorities", "AsidExecutives"]
+      },
+      "sys/uuSubAppInstance/productLogo/get": {
+        "sysStateList": ["created", "active", "restricted"],
+        "profileList": ["Public"]
+      },
+      "getProductLogo": {
+        "sysStateList": ["created", "active", "restricted"],
+        "profileList": ["Public"]
+      },
+      "sys/uuAppStatistics/privilegedGetTFileAttributes": {
+        "sysStateList": ["active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      },
+      "sys/uuAppStatistics/privilegedRecalculateTFiles": {
+        "sysStateList": ["active"],
+        "profileList": ["AsidAuthorities", "AsidExecutives", "AsidAuditors"]
+      }
+    },
+    "permissionMap": []
+  },
+  "*": {
+    "profileList": ["Authorities", "Executives", "AwidLicenseOwner", "Public", "Authenticated", "AwidInitiator", "Contributor", "Owner", "Auditors", "Readers"],
+    "useCaseMap": {
+      "sys/uuAppWorkspace/init": {
+        "sysStateList": ["created", "assigned"],
+        "profileList": ["AwidLicenseOwner", "AwidInitiator"]
+      },
+      "sys/uuAppWorkspace/get": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "suspended", "assigned"],
+        "profileList": ["AwidLicenseOwner", "Authorities", "Executives", "Auditors", "AwidInitiator"]
+      },
+      "sys/uuAppWorkspace/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/profile/get": {
+        "sysStateList": ["active", "restricted", "readOnly"],
+        "profileList": ["Authorities", "Executives", "Auditors"]
+      },
+      "sys/uuAppWorkspace/profile/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/profile/list": {
+        "sysStateList": ["active", "restricted", "readOnly"],
+        "profileList": ["Authorities", "Executives", "Auditors"]
+      },
+      "sys/uuAppWorkspace/permission/create": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["AwidLicenseOwner", "Authorities"]
+      },
+      "sys/uuAppWorkspace/permission/delete": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/permission/list": {
+        "sysStateList": ["active", "restricted", "readOnly"],
+        "profileList": ["Authorities", "Executives", "Auditors"]
+      },
+      "sys/uuAppWorkspace/setActiveSysState": {
+        "sysStateList": ["readOnly", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/setRestrictedSysState": {
+        "sysStateList": ["active", "readOnly"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/setReadOnlySysState": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/initUve": {
+        "sysStateList": ["created"],
+        "profileList": ["Public", "AwidLicenseOwner"]
+      },
+      "sys/uuAppDataStore/stats/get": {
+        "sysStateList": ["active", "readOnly"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppDataStore/stats/calculate": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/dump": {
+        "sysStateList": ["restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/restore": {
+        "sysStateList": ["restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/import": {
+        "sysStateList": ["restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/listImportMappings": {
+        "sysStateList": ["active", "restricted", "readOnly"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/deleteImportMappings": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/setAuthorizationStrategy": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/connectArtifact": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/appClientToken/listKeys": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "assigned"],
+        "profileList": ["Public"]
+      },
+      "sys/appClientToken/initKeys": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities"]
+      },
+      "sys/logRecord/delete": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities"]
+      },
+      "sys/logRecord/list": {
+        "sysStateList": ["active", "restricted", "readOnly"],
+        "profileList": ["Authorities"]
+      },
+      "oidc/getClientId": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/introspect": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/callback": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/refresh": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/grantCallToken": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/extendSession": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "oidc/logout": {
+        "sysStateList": ["created", "assigned", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "sys/getHealth": {
+        "sysStateList": ["created", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "sys/getUseCases": {
+        "sysStateList": ["created", "restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "sys/getStatistics": {
+        "sysStateList": ["restricted", "active", "readOnly", "suspended", "closed"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/productInfo/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/productInfo/get": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "getProductInfo": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "sys/uuAppWorkspace/productLogo/set": {
+        "sysStateList": ["active", "restricted"],
+        "profileList": ["Authorities", "Executives"]
+      },
+      "sys/uuAppWorkspace/productLogo/get": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "getProductLogo": {
+        "sysStateList": ["created", "active", "restricted", "readOnly", "suspended", "closed"],
+        "profileList": ["Public"]
+      },
+      "sys/uuAppStatistics/getTFileAttributes": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppStatistics/recalculateTFiles": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities"]
+      },
+      "sys/uuAppWorkspace/load": {
+        "sysStateList": ["active"],
+        "profileList": ["Authenticated"]
+      },
+      "sys/uuAppWorkspace/loadBasicData": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "defaultUve": {
+        "profileList": ["Public"],
+        "sysStateList": ["active"]
+      },
+      "list/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "list/getProducts": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "list/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "list/linkProduct": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "list/updateProduct": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "product/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "product/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "product/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner", "Contributor"]
+      },
+      "identity/assignRole": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner"]
+      },
+      "identity/removeRole": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner"]
+      },
+      "identity/getRoles": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      }
+    }
+  }
+}

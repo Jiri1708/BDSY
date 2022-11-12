@@ -1,0 +1,17 @@
+{
+  "product": "uu_homework_maing01",
+  "version": "0.1.0",
+  "license": "License Commercial",
+  "description": {
+    "en": "",
+    "cs": ""
+  },
+  "devkit": {
+    "development": {
+      "appBoxLocationUri": "----- VALUE REQUIRED -----",
+      "appDeploymentUri": null
+    }
+  },
+  "uu_homework_maing01-hi": {},
+  "uu_homework_maing01-server": {}
+}

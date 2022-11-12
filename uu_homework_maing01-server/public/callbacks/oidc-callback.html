@@ -1,0 +1,34 @@
+<script>
+  var isIE = navigator.userAgent.match(/MSIE|Trident/);
+  var stateParam = (location.href.match(/[#\?&]state=([^&]*)/) || [])[1];
+  var stateEnc = stateParam ? decodeURIComponent(stateParam) : null;
+  var stateJsonStr = stateEnc ? decodeURIComponent(escape(atob(stateEnc.replace(/-/g, "+").replace(/_/g, "/")))) : null;
+  var state = stateJsonStr ? JSON.parse(stateJsonStr) : null;
+  var authCtx = state ? state.authCtx : null;
+  var popupUsed = state ? (state.usePopup != null ? state.usePopup : true) : true;
+  try {
+    popupUsed = popupUsed && opener && !opener.closed && opener.uuOidcCallbackFn;
+  } catch (e) {
+    popupUsed = false;
+  }
+  if (popupUsed) {
+    opener.uuOidcCallbackFn(location.href + "", window, isIE && authCtx ? JSON.stringify(authCtx) : authCtx);
+  } else if (frameElement && parent && parent.uuOidcCallbackFn) {
+    parent.uuOidcCallbackFn(location.href + "", window, isIE && authCtx ? JSON.stringify(authCtx) : authCtx);
+  } else {
+    var appUri = state ? state.appUri : null;
+    if (appUri) {
+      sessionStorage.setItem("uu_app_oidc_auth_cb", "true");
+      if (authCtx) {
+        sessionStorage.setItem("uu_app_oidc_auth_ctx", JSON.stringify(authCtx));
+      }
+      if (appUri.match(/^\//)) {
+        location.href = appUri;
+      } else {
+        location.href = location.pathname.replace(/\/oidc\/callback.*/, "/");
+      }
+    } else {
+      close();
+    }
+  }
+</script>

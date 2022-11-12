@@ -1,0 +1,36 @@
+{
+  "appName": "Application uuHomework",
+  "About": {
+    "header": "About application uuHomework",
+    "creatorsHeader": "Application creators",
+    "termsOfUse": "Terms of use"
+  },
+  "AboutContent": {
+    "content": "<uu5string/>Demo application is a template for developing new applications.",
+    "technologiesContent": "<uu5string/>Other used technologies: <Uu5Elements.Link href='http://www.w3schools.com/html/default.asp' target='_blank'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/css/default.asp' target='_blank'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/js/default.asp' target='_blank'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href='http://getbootstrap.com' target='_blank'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href='https://reactjs.org' target='_blank'>React</Uu5Elements.Link>, <Uu5Elements.Link href='https://www.ruby-lang.org' target='_blank'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href='http://puma.io' target='_blank'>Puma</Uu5Elements.Link> a <Uu5Elements.Link href='https://www.docker.com' target='_blank'>Docker</Uu5Elements.Link>. Application is operated in the <Uu5Elements.Link href='https://plus4u.net' target='_blank'>Plus4U</Uu5Elements.Link> internet service with the usage of <Uu5Elements.Link href='https://azure.microsoft.com' target='_blank'>Microsoft Azure</Uu5Elements.Link> cloud."
+  },
+  "ControlPanel": {
+    "rightsError": "You do not have sufficient rights to display this component.",
+    "btNotConnected": "The application is not connected to a Business Territory."
+  },
+  "Home": {
+    "welcome": "Welcome",
+    "intro": "<uu5string/>This template consist of prepared client and server side. Shown components demonstrate possibilities and way of using. For application developing purposes they are suitable for modifying, copying and deleting. More about uuApp Structure see documentation&nbsp; <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuAppDevKit</Uu5Elements.Link>.",
+    "clientSide": "<uu5string/>Libraries <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\" target=\"_blank\">uu5</Uu5Elements.Link> and <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\" target=\"_blank\">uuPlus4U5</Uu5Elements.Link> are used for developing of client side.",
+    "serverSide": "<uu5string/>It is necessary to initialize application workspace for running server side. See manual <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuApp Template Developer Guide</Uu5Elements.Link>"
+  },
+  "InitAppWorkspace": {
+    "notAuthorized": "You do not have sufficient rights to use the application.",
+    "formHeader": "Initialize uuApp",
+    "formHeaderInfo": "<uu5string/>Your uuApp is running, but requires initialization. If you need help with filling up this form, see\n<Uu5Elements.Link target=\"_blank\" href=\"#\">Documentation</Uu5Elements.Link>.",
+    "notAuthorizedForInit": "The application is running but it was not initialized yet and you do not have sufficient rights to do so.",
+    "uuBtLocationUriLabel": "uuBusinessTerritory location",
+    "uuBtLocationUriInfo": "Uri of the uuBt location where AWSC will be created",
+    "nameLabel": "Name",
+    "initialize": "Initialize"
+  },
+  "Menu": {
+    "home": "Welcome",
+    "about": "About Application"
+  }
+}

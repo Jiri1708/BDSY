@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
+    <title>uuHomework</title>
+
+    <!-- NOTE Following URLs are automatically replaced during build according to the configuration.
+      Additionally, <base> element is automatically inserted here so that relative paths are loaded relatively to app base,
+      not relatively to current use case in the URL. -->
+    <% template = `
+    <script src="uu5-environment.js"></script>
+    <script src="~uu5g05-browser-compatibility/uu5g05-browser-compatibility.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.plus4u.net/uu-gdsg01/1.0.0/assets/font.min.css">
+    <link type="text/css" rel="stylesheet" href="loading.css">
+    <link rel="preconnect" href="https://uuidentity.plus4u.net">
+    <script src="~uu5loaderg01" crossorigin="anonymous"></script>
+
+    <meta name="apple-mobile-web-app-title" content="uuHomework">
+    <meta name="application-name" content="uuHomework">
+    <meta name="msapplication-TileImage" content="assets/meta/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#004191">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/meta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="assets/meta/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="assets/meta/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" href="assets/meta/safari-pinned-tab.svg" color="#004191">
+
+    <!-- Add extra <link>s or <script>s here if necessary. -->
+
+    ` %><%= htmlWebpackPlugin.options.ejsFixUrls(template) %>
+  </head>
+
+  <body class="uu-gdsg01-unicorn">
+
+    <div id="uuApp">
+      <div id="uuAppLoading">
+        <%=
+          // add loading indication and apply uuApp visual settings from uu5Environment["uu_plus4u5g02_uuApp"] (env/production.json)
+          // https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book/page?code=67000055
+          htmlWebpackPlugin.options.renderTemplate("index-loading.html")
+        %>
+      </div>
+    </div>
+
+<%=
+  // insert error snippet if application initialization fails entirely
+  htmlWebpackPlugin.options.renderTemplate("index-error.html", {
+    handlerName: "handleUuAppScriptError",
+    targetElementId: "uuApp"
+  })
+%>
+
+    <script>
+      if (!window.Uu5Loader) handleUuAppScriptError(new Error("Uu5Loader failed to load."));
+      else Uu5Loader.import("./index.js").then(function (Index) {
+        Index.render("uuApp");
+      }).catch(handleUuAppScriptError);
+    </script>
+
+<%=
+  // insert <noscript> snippet for users with turned off JavaScript
+  htmlWebpackPlugin.options.renderTemplate("index-noscript.html")
+%>
+  </body>
+</html>

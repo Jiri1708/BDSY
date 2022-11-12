@@ -1,0 +1,12 @@
+{
+  "port": 8080,
+  "uuSubAppDataStoreMap": {
+    "primary": "mongodb://127.0.0.1:27017/homeworkMainPrimary"
+  },
+  "asid_license_owner_list": ["3627-8321-1"],
+  "privilegedUserMap":{
+    "asidOwner": "3627-8321-1"
+  },
+  "asid": "11111111111111111111111111111111",
+  "log_level": "INFO"
+}

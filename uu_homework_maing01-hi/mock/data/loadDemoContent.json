@@ -1,0 +1,12 @@
+{
+  "title": {
+    "cs": "Zkušební data",
+    "en": "Testing data"
+  },
+  "name": "Testing data",
+  "description": "<uu5string/><p>Testing mock data loaded from local file.</p><p>For switching off mock data and calling server API change parameter \"useMockData\": false in configuration file in &lt;*-hi&gt;/env/development.json</p>",
+  "languages": [
+    "cs",
+    "en"
+  ]
+}

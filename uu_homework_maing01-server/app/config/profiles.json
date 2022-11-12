@@ -1,0 +1,82 @@
+{
+  "{asid}": {
+    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public","Contributor","Owner"],
+    "useCaseMap": {}
+  },
+  "*": {
+    "profileList": ["Authorities","Executives","AwidLicenseOwner","Public","Authenticated","AwidInitiator","Contributor","Owner"],
+    "useCaseMap": {
+      "sys/uuAppWorkspace/init": {
+        "sysStateList": ["created","assigned"],
+        "profileList": ["AwidLicenseOwner","AwidInitiator"]
+      },
+      "sys/uuAppWorkspace/load": {
+        "sysStateList": ["active"],
+        "profileList": ["Authenticated"]
+      },
+      "sys/uuAppWorkspace/loadBasicData": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "defaultUve": {
+        "profileList": ["Public"]
+      },
+      "sys/uuAppWorkspace/initUve": {
+        "sysStateList": ["created"],
+        "profileList": ["Public","AwidLicenseOwner"]
+      },
+      "list/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "list/getProducts": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "list/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "list/linkProduct": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "list/updateProduct": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "product/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "product/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "product/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner","Contributor"]
+      },
+      "identity/assignRole": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner"]
+      },
+      "identity/removeRole": {
+        "sysStateList": ["active"],
+        "profileList": ["Owner"]
+      },
+      "identity/getRoles": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      }
+    }
+  }
+}

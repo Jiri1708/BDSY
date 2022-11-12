@@ -1,0 +1,34 @@
+{
+  "asid_license_owner_list": ["3627-8321-1"],
+  "asid": "11111111111111111111111111111111",
+  "sysUuAppWorkspace": {
+    "awid": "22222222222222222222222222222222",
+    "awidLicenseOwnerList": ["3627-8321-1"]
+  },
+  "userMap": {
+    "AsidLicenseOwner": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "14-2710-1"
+    },
+    "AsidAuthorities": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "14-2710-1"
+    },
+    "AwidLicenseOwner": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "14-2710-1"
+    },
+    "Authorities": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "3627-8321-1",
+      "profileList": ["Authorities"]
+    }
+  },
+  "log_level": "FATAL",
+  "uuapp.appserver.monitoring.accesslog.log_level": "OFF",
+  "uuapp.perflog.logger.log_level": "OFF"
+}

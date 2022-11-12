@@ -1,0 +1,49 @@
+{
+  "name": "uu_homework_maing01-server",
+  "version": "0.1.0",
+  "description": "",
+  "license": "License Commercial",
+  "spec": "nodejs-app; uu_appg01_devkit@5.5.0",
+  "dependencies": {
+    "uu_appg01_server": "^5.0.0",
+    "uu_apprepresentationg01": "^2.0.0"
+  },
+  "devDependencies": {
+    "uu_appg01_devkit": "^5.5.0",
+    "uu_appg01_server-test": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "clean": "uu_appg01_devkit clean",
+    "test": "uu_appg01_devkit test",
+    "build": "uu_appg01_devkit build",
+    "package": "uu_appg01_devkit package",
+    "deploy": "uu_appg01_devkit deploy",
+    "undeploy": "uu_appg01_devkit undeploy",
+    "start": "uu_appg01_devkit start",
+    "prettify": "uu_appg01_devkit prettify",
+    "vulnerabilityScan": "uu_appg01_devkit vulnerabilityScan",
+    "uuAppBox": "uu_appg01_devkit uuAppBox",
+    "uuAppBoxCopy": "uu_appg01_devkit uuAppBoxCopy",
+    "uuCloudDeploy": "uu_appg01_devkit uuCloudDeploy",
+    "uuCloudUndeploy": "uu_appg01_devkit uuCloudUndeploy",
+    "uuCloudShare": "uu_appg01_devkit uuCloudShare",
+    "uuCloudUnshare": "uu_appg01_devkit uuCloudUnshare",
+    "uuCloudDeployList": "uu_appg01_devkit uuCloudDeployList",
+    "uuCloudSwap": "uu_appg01_devkit uuCloudSwap",
+    "uuCloudLogStoreExport": "uu_appg01_devkit uuCloudLogStoreExport",
+    "uuCmdCreate": "uu_appg01_devkit uuCmdCreate",
+    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade"
+  },
+  "main": "app.js",
+  "files": [
+    "app",
+    "env",
+    "public"
+  ],
+  "prettier": {
+    "printWidth": 120
+  }
+}

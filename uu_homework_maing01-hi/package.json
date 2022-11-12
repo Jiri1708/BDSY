@@ -1,0 +1,46 @@
+{
+  "name": "uu_homework_maing01-hi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "license": "License Commercial",
+  "namespace": "UuHomework",
+  "spec": "uu5-app; uu_appg01_devkit@5.5.0",
+  "dependencies": {
+    "uu5g04": "^1.0.0",
+    "uu5g05": "^1.0.0",
+    "uu5g05-browser-compatibility": "^1.0.0",
+    "uu5g05-elements": "^1.0.0",
+    "uu5g05-forms": "^1.0.0",
+    "uu5loaderg01": "^1.0.0",
+    "uu_plus4u5g02": "^1.0.0",
+    "uu_plus4u5g02-app": "^1.0.0",
+    "uu_plus4u5g02-elements": "^1.0.0"
+  },
+  "uuBuildSettings": {
+    "externals": {}
+  },
+  "devDependencies": {
+    "uu_appg01_devkit": "^5.5.0",
+    "uu5g05-test": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "clean": "uu_appg01_devkit clean",
+    "test": "uu_appg01_devkit test",
+    "build": "uu_appg01_devkit build",
+    "package": "uu_appg01_devkit package",
+    "start": "uu_appg01_devkit start",
+    "prettify": "uu_appg01_devkit prettify",
+    "vulnerabilityScan": "uu_appg01_devkit vulnerabilityScan",
+    "generate": "uu_appg01_devkit generate",
+    "lsiExport": "uu_appg01_devkit lsiExport",
+    "lsiImport": "uu_appg01_devkit lsiImport",
+    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade"
+  },
+  "prettier": {
+    "printWidth": 120
+  }
+}
