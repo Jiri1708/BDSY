@@ -118,7 +118,7 @@ class ListAbl {
         const element = dtoIn.productList[index];
         let check = await this.productDao.getById(awid, element.id);
         if (check === null) {
-          throw new Errors.Create.ListDaoCreateProductDoesNotExistFailed({ uuAppErrorMap });
+          throw new Errors.UpdateProduct.ListDaoProductDoesNotExist({ uuAppErrorMap });
         } else {
           dtoIn.productList[index].name = check.name;
           dtoIn.productList[index].measureUnit = check.measureUnit;
@@ -153,12 +153,17 @@ class ListAbl {
     );
 
     // HDS 2
-    let dtoOut = [];
+    let dtoOut = {
+      awid: awid,
+      uuAppErrorMap: uuAppErrorMap,
+    };
     let list;
     //get specific list
+
     if (dtoIn.id) {
       list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.Get.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+      // dtoOut.lists.push(list);
     }
 
     // get all lists
@@ -166,10 +171,8 @@ class ListAbl {
       list = await this.dao.get(awid);
       if (!list) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
-
-    dtoOut.push(list);
-    //dtoOut.awid = awid;
-    //dtoOut.uuAppErrorMap = uuAppErrorMap;
+    console.log(uuAppErrorMap);
+    dtoOut.lists = list;
     return dtoOut;
   }
 
@@ -206,6 +209,36 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
+
+    dtoIn.awid = awid;
+    // DAO
+    try {
+      //
+
+      //is productList array empty?
+      if (dtoIn.productList?.length) {
+        //get saved list
+        let checkedList = await this.dao.getById(awid, dtoIn.id);
+        //check if productId is present in savedList
+        for (let index = 0; index < dtoIn.productList.length; index++) {
+          const element = dtoIn.productList[index];
+          let obj = checkedList.productList.find((o) => o.id == element.id);
+          if (obj) {
+            dtoOut = await this.dao.update(dtoIn);
+          } else {
+            throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({ uuAppErrorMap });
+          }
+        }
+      }
+
+      //array empty
+      else throw new Errors.UpdateProduct.NoProductPresent({ uuAppErrorMap });
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Update.ListDaoUpdateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;

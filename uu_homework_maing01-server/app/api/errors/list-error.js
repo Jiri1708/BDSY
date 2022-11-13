@@ -26,7 +26,7 @@ const Get = {
       this.code = `${Get.UC_CODE}noListExists`;
       this.message = "Application contains no list";
     }
-  },
+  }
 };
 
 const Create = {
@@ -115,6 +115,20 @@ const LinkProduct = {
       this.message = "Link of selected product failed";
     }
   },
+  NoProductPresent : class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}noProductPresent`;
+      this.message = "Update of products went wrong: Product not present";
+    }
+  },
+  ProductAlreadyLinkedPresent : class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}productAlreadyLinked`;
+      this.message = "Update of products went wrong: Product already linked";
+    }
+  }
 };
 
 const UpdateProduct = {
@@ -132,7 +146,28 @@ const UpdateProduct = {
       this.code = `${UpdateProduct.UC_CODE}listDaoUpdateProductFail`;
       this.message = "Update of selected product failed";
     }
+  },  
+  ListDaoProductDoesNotExist: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}listDaoProductDoesNotExist`;
+      this.message = "Update of products went wrong: Unknown productId";
+    }
+  }, 
+  ListDaoProductNotLinkedToList: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}listDaoProductNotLinkedToList`;
+      this.message = "Update of products went wrong: Product not linked";
+    }
   },
+  NoProductPresent : class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}noProductPresent`;
+      this.message = "Update of products went wrong: Product not present";
+    }
+  }
 };
 
 const GetProducts = {
