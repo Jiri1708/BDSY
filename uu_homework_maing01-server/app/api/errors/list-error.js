@@ -51,6 +51,14 @@ const Create = {
       this.message = "Creation of list failed";
     }
   }
+  ,
+  ListDaoCreateProductDoesNotExistFailed: class extends HomeworkMainUseCaseError{
+    constructor(){
+      super(...arguments);
+      this.code = `${Create.UC_CODE}productDoesNotExists`;
+      this.message = "Selected product does not exist";
+    }
+  }
   
 };
 

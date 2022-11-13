@@ -1,4 +1,5 @@
 "use strict";
+const { Console } = require("console");
 const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
@@ -33,6 +34,7 @@ class ListAbl {
   constructor() {
     this.validator = Validator.load();
      this.dao = DaoFactory.getDao("list");
+     this.productDao = DaoFactory.getDao("product");
   }
   async updateProduct(awid, dtoIn) {
     // HDS 1.1
@@ -136,9 +138,21 @@ class ListAbl {
       Errors.Create.InvalidDtoIn
     );
 
-    // HDS 2
+    // check product valid
     let dtoOut = { ...dtoIn };
       dtoIn.awid = awid;
+      console.log(dtoIn.productList?.length)
+      console.log(dtoIn)
+      if (dtoIn.productList?.length){
+      for (let index = 0; index < dtoIn.productList.length; index++) {
+        const element = dtoIn.productList[index];
+         let check = await this.productDao.getById(awid, element.id);
+          if (check === null){
+            throw new Errors.Create.ListDaoCreateProductDoesNotExistFailed({uuAppErrorMap});
+        }
+      }
+    }
+
     // DAO 
     try{
       dtoOut = await this.dao.create(dtoIn);
