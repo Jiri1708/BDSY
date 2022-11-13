@@ -4,7 +4,6 @@ const HomeworkMainUseCaseError = require("./homework-main-use-case-error.js");
 const LIST_ERROR_PREFIX = `${HomeworkMainUseCaseError.ERROR_PREFIX}list/`;
 
 const Get = {
-  
   UC_CODE: `${HomeworkMainUseCaseError.ERROR_PREFIX}list/get/`,
 
   InvalidDtoIn: class extends HomeworkMainUseCaseError {
@@ -14,22 +13,20 @@ const Get = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDoesNotExist: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDoesNotExist: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Get.UC_CODE}listDoesNotExist`;
       this.message = "Specified ID does not exist";
     }
-  }
-  ,
-  NoListExists: class extends HomeworkMainUseCaseError{
-    constructor(){
+  },
+  NoListExists: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Get.UC_CODE}noListExists`;
       this.message = "Application contains no list";
     }
-  }
-  
+  },
 };
 
 const Create = {
@@ -44,29 +41,21 @@ const Create = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDaoCreateFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDaoCreateFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}listDaoCreateFail`;
       this.message = "Creation of list failed";
     }
-  }
-  ,
-  ListDaoCreateProductDoesNotExistFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  },
+  ListDaoCreateProductDoesNotExistFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}productDoesNotExists`;
       this.message = "Selected product does not exist";
     }
-  }
-  
+  },
 };
-
-const GetProducts = {
-  UC_CODE: `${LIST_ERROR_PREFIX}getProducts/`,
-  
-};
-
 const Update = {
   UC_CODE: `${LIST_ERROR_PREFIX}update/`,
   InvalidDtoIn: class extends HomeworkMainUseCaseError {
@@ -76,13 +65,13 @@ const Update = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDaoUpdateFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDaoUpdateFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Update.UC_CODE}listDaoUpdateFail`;
       this.message = "Update of list failed";
     }
-  }
+  },
 };
 
 const Delete = {
@@ -94,23 +83,22 @@ const Delete = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDaoDeleteFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDaoDeleteFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Delete.UC_CODE}listDaoDeleteFail`;
       this.message = "Delete of list failed";
     }
-  }
-  ,
-  ListDoesNotExist: class extends HomeworkMainUseCaseError{
-    constructor(){
+  },
+  ListDoesNotExist: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${Delete.UC_CODE}listDoesNotExists`;
       this.message = "Specified ID does not exists";
     }
-  }
+  },
 };
-
+//Unused methods
 const LinkProduct = {
   UC_CODE: `${LIST_ERROR_PREFIX}linkProduct/`,
   InvalidDtoIn: class extends HomeworkMainUseCaseError {
@@ -120,13 +108,13 @@ const LinkProduct = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDaoLinkProductFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDaoLinkProductFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${LinkProduct.UC_CODE}listDaoLinkProductFail`;
       this.message = "Link of selected product failed";
     }
-  }
+  },
 };
 
 const UpdateProduct = {
@@ -138,17 +126,18 @@ const UpdateProduct = {
       this.message = "DtoIn is not valid.";
     }
   },
-  ListDaoUpdateProductFailed: class extends HomeworkMainUseCaseError{
-    constructor(){
+  ListDaoUpdateProductFailed: class extends HomeworkMainUseCaseError {
+    constructor() {
       super(...arguments);
       this.code = `${UpdateProduct.UC_CODE}listDaoUpdateProductFail`;
       this.message = "Update of selected product failed";
     }
-  }
-  
+  },
 };
 
-
+const GetProducts = {
+  UC_CODE: `${LIST_ERROR_PREFIX}getProducts/`,
+};
 
 module.exports = {
   UpdateProduct,
@@ -157,5 +146,5 @@ module.exports = {
   Update,
   GetProducts,
   Create,
-  Get
+  Get,
 };

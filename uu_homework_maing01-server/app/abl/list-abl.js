@@ -36,42 +36,7 @@ class ListAbl {
     this.dao = DaoFactory.getDao("list");
     this.productDao = DaoFactory.getDao("product");
   }
-  async updateProduct(awid, dtoIn) {
-    // HDS 1.1
-    let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);
 
-    // HDS 1.2, 1.3 // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      WARNINGS.updateProductUnsupportedKeys.code,
-      Errors.UpdateProduct.InvalidDtoIn
-    );
-
-    // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    return dtoOut;
-  }
-  async linkProduct(awid, dtoIn) {
-    // HDS 1.1
-    let validationResult = this.validator.validate("listLinkProductDtoInType", dtoIn);
-
-    // HDS 1.2, 1.3 // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      WARNINGS.linkProductUnsupportedKeys.code,
-      Errors.LinkProduct.InvalidDtoIn
-    );
-
-    // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    return dtoOut;
-  }
   async delete(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listDeleteDtoInType", dtoIn);
@@ -117,28 +82,22 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
+
+    dtoIn.awid = awid;
+    // DAO
+    try {
+      dtoOut = await this.dao.update(dtoIn);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Update.ListDaoUpdateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
-  async getProducts(awid, dtoIn) {
-    // HDS 1.1
-    let validationResult = this.validator.validate("listGetProductDtoInType", dtoIn);
 
-    // HDS 1.2, 1.3 // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      WARNINGS.getProductsUnsupportedKeys.code,
-      Errors.GetProducts.InvalidDtoIn
-    );
-
-    // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    return dtoOut;
-  }
   async create(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listCreateDtoInType", dtoIn);
@@ -213,6 +172,64 @@ class ListAbl {
     //dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
+
+  //#region Dummy methods
+  async getProducts(awid, dtoIn) {
+    // HDS 1.1
+    let validationResult = this.validator.validate("listGetProductDtoInType", dtoIn);
+
+    // HDS 1.2, 1.3 // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.getProductsUnsupportedKeys.code,
+      Errors.GetProducts.InvalidDtoIn
+    );
+
+    // HDS 2
+    let dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    return dtoOut;
+  }
+  async updateProduct(awid, dtoIn) {
+    // HDS 1.1
+    let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);
+
+    // HDS 1.2, 1.3 // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.updateProductUnsupportedKeys.code,
+      Errors.UpdateProduct.InvalidDtoIn
+    );
+
+    // HDS 2
+    let dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    return dtoOut;
+  }
+  async linkProduct(awid, dtoIn) {
+    // HDS 1.1
+    let validationResult = this.validator.validate("listLinkProductDtoInType", dtoIn);
+
+    // HDS 1.2, 1.3 // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.linkProductUnsupportedKeys.code,
+      Errors.LinkProduct.InvalidDtoIn
+    );
+
+    // HDS 2
+    let dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    return dtoOut;
+  }
+
+  //#endregion
 }
 
 module.exports = new ListAbl();

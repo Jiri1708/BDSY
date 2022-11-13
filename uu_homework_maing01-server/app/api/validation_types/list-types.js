@@ -14,7 +14,7 @@ const listCreateDtoInType = shape({
   const listUpdateDtoInType = shape({
     name: uu5String(255).isRequired(),
     ownerId: uuIdentity().isRequired(),
-    id: uu5String(255).isRequired()
+    id: uu5String(255).isRequired(),
   });
 
 

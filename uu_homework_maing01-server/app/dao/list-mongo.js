@@ -30,8 +30,8 @@ class ListMongo extends UuObjectDao {
   }
   async update(uuObject) {
     let filter = {
-      awid: awid,
-      id: id,
+      awid: uuObject.awid,
+      id: uuObject.id,
     };
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
