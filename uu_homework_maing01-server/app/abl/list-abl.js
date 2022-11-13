@@ -33,8 +33,8 @@ const WARNINGS = {
 class ListAbl {
   constructor() {
     this.validator = Validator.load();
-     this.dao = DaoFactory.getDao("list");
-     this.productDao = DaoFactory.getDao("product");
+    this.dao = DaoFactory.getDao("list");
+    this.productDao = DaoFactory.getDao("product");
   }
   async updateProduct(awid, dtoIn) {
     // HDS 1.1
@@ -85,9 +85,22 @@ class ListAbl {
     );
 
     // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    let dtoOut = {
+      awid: awid,
+      uuAppErrorMap: uuAppErrorMap,
+    };
+    dtoIn.awid = awid;
+    let list = await this.dao.getById(awid, dtoIn.id);
+    if (!list) throw new Errors.Delete.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+    try {
+      await this.dao.remove(dtoIn);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Delete.ListDaoDeleteFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
     return dtoOut;
   }
   async update(awid, dtoIn) {
@@ -140,26 +153,26 @@ class ListAbl {
 
     // check product valid
     let dtoOut = { ...dtoIn };
-      dtoIn.awid = awid;
-      console.log(dtoIn.productList?.length)
-      console.log(dtoIn)
-      if (dtoIn.productList?.length){
+    dtoIn.awid = awid;
+    if (dtoIn.productList?.length) {
       for (let index = 0; index < dtoIn.productList.length; index++) {
         const element = dtoIn.productList[index];
-         let check = await this.productDao.getById(awid, element.id);
-          if (check === null){
-            throw new Errors.Create.ListDaoCreateProductDoesNotExistFailed({uuAppErrorMap});
+        let check = await this.productDao.getById(awid, element.id);
+        if (check === null) {
+          throw new Errors.Create.ListDaoCreateProductDoesNotExistFailed({ uuAppErrorMap });
+        } else {
+          dtoIn.productList[index].name = check.name;
+          dtoIn.productList[index].measureUnit = check.measureUnit;
         }
       }
     }
 
-    // DAO 
-    try{
+    // DAO
+    try {
       dtoOut = await this.dao.create(dtoIn);
-    }
-    catch (e){
-      if (e instanceof ObjectStoreError){
-        throw new Errors.Create.ListDaoCreateFailed({uuAppErrorMap}, e);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.ListDaoCreateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
@@ -181,9 +194,23 @@ class ListAbl {
     );
 
     // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    let dtoOut = [];
+    let list;
+    //get specific list
+    if (dtoIn.id) {
+      list = await this.dao.getById(awid, dtoIn.id);
+      if (!list) throw new Errors.Get.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+    }
+
+    // get all lists
+    else {
+      list = await this.dao.get(awid);
+      if (!list) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
+    }
+
+    dtoOut.push(list);
+    //dtoOut.awid = awid;
+    //dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
 }

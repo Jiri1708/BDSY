@@ -101,6 +101,14 @@ const Delete = {
       this.message = "Delete of list failed";
     }
   }
+  ,
+  ListDoesNotExist: class extends HomeworkMainUseCaseError{
+    constructor(){
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}listDoesNotExists`;
+      this.message = "Specified ID does not exists";
+    }
+  }
 };
 
 const LinkProduct = {

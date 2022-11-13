@@ -7,18 +7,17 @@ const Errors = require("../api/errors/product-error.js");
 
 const WARNINGS = {
   updateUnsupportedKeys: {
-    code: `${Errors.Update.UC_CODE}unsupportedKeys`
+    code: `${Errors.Update.UC_CODE}unsupportedKeys`,
   },
   getUnsupportedKeys: {
-    code: `${Errors.Get.UC_CODE}unsupportedKeys`
+    code: `${Errors.Get.UC_CODE}unsupportedKeys`,
   },
   createUnsupportedKeys: {
-    code: `${Errors.Create.UC_CODE}unsupportedKeys`
-  }
+    code: `${Errors.Create.UC_CODE}unsupportedKeys`,
+  },
 };
 
 class ProductAbl {
-
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("product");
@@ -42,18 +41,15 @@ class ProductAbl {
     dtoOut.uuAppErrorMap = uuAppErrorMap;
 
     dtoIn.awid = awid;
-    // DAO 
-    try{
+    // DAO
+    try {
       dtoOut = await this.dao.update(dtoIn);
-    }
-    catch (e){
-      if (e instanceof ObjectStoreError){
-        throw new Errors.Update.ProductDaoUpdateFailed({uuAppErrorMap}, e);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Update.ProductDaoUpdateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
-
-
 
     return dtoOut;
   }
@@ -71,29 +67,29 @@ class ProductAbl {
     );
     let dtoOut = { ...dtoIn };
     // HDS 2
-   
-    if (!dtoIn.idList?.length){
+
+    //get all products (no id listed)
+    if (!dtoIn.idList?.length) {
       dtoOut = await this.dao.get(awid);
     }
-    else{
+
+    // get specified products
+    else {
       dtoOut = {
-        productList: [
-        ],
+        productList: [],
         awid: awid,
-        uuAppErrorMap:{}
+        uuAppErrorMap: {},
       };
-      
+
       for (let index = 0; index < dtoIn.idList.length; index++) {
         let test = await this.dao.getById(awid, dtoIn.idList[index].id);
         dtoOut.productList.push(test);
-      } 
-     
-    } 
+      }
+    }
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
 
-      console.log(dtoOut)
-    
+    console.log(dtoOut);
 
     return dtoOut;
   }
@@ -110,28 +106,23 @@ class ProductAbl {
       Errors.Create.InvalidDtoIn
     );
 
-    
     // HDS 2
     let dtoOut = { ...dtoIn };
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
-    
+
     dtoIn.awid = awid;
-    // DAO 
-    try{
+    // DAO
+    try {
       dtoOut = await this.dao.create(dtoIn);
-    }
-    catch (e){
-      if (e instanceof ObjectStoreError){
-        throw new Errors.Create.ProductDaoCreateFailed({uuAppErrorMap}, e);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.ProductDaoCreateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
     return dtoOut;
   }
-
 }
-
-
 
 module.exports = new ProductAbl();
