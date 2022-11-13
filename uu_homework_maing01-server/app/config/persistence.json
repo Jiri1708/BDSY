@@ -11,6 +11,11 @@
           "realization": "dao/ListMongo",
           "maxNoi": 1024
         }
+        ,
+        "product": {
+          "realization": "dao/ProductMongo",
+          "maxNoi": 1024
+        }
       }
     }
   }

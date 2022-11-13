@@ -11,6 +11,13 @@ const Create = {
       this.code = `${Create.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
+  },
+  ProductDaoCreateFailed: class extends HomeworkMainUseCaseError{
+    constructor(){
+      super(...arguments);
+      this.code = `${Create.UC_CODE}productDaoCreateFail`;
+      this.message = "Creation of product failed";
+    }
   }
 };
 
@@ -22,6 +29,13 @@ const Get = {
       this.code = `${Get.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
+  },
+  ProductDaoGetFailed: class extends HomeworkMainUseCaseError{
+    constructor(){
+      super(...arguments);
+      this.code = `${Get.UC_CODE}productDaoGetFail`;
+      this.message = "No product found";
+    }
   }
 };
 
@@ -32,6 +46,13 @@ const Update = {
       super(...arguments);
       this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
+    }
+  },
+  ProductDaoUpdateFailed: class extends HomeworkMainUseCaseError{
+    constructor(){
+      super(...arguments);
+      this.code = `${Update.UC_CODE}productDaoUpdateFail`;
+      this.message = "Update of product failed";
     }
   }
 };
