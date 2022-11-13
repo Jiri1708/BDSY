@@ -29,6 +29,11 @@ class ListMongo extends UuObjectDao {
     return await super.deleteOne(filter);
   }
   async update(uuObject) {
+    console.log("DAO method")
+    console.log("DAO method")
+    console.log("----------")
+    console.log(uuObject)
+    
     let filter = {
       awid: uuObject.awid,
       id: uuObject.id,

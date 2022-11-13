@@ -128,6 +128,13 @@ const LinkProduct = {
       this.code = `${UpdateProduct.UC_CODE}productAlreadyLinked`;
       this.message = "Update of products went wrong: Product already linked";
     }
+  },  
+  ListDaoProductDoesNotExist: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}listDaoProductDoesNotExist`;
+      this.message = "Update of products went wrong: Unknown productId";
+    }
   }
 };
 

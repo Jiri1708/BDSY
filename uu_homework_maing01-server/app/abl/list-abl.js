@@ -221,10 +221,19 @@ class ListAbl {
         let checkedList = await this.dao.getById(awid, dtoIn.id);
         //check if productId is present in savedList
         for (let index = 0; index < dtoIn.productList.length; index++) {
-          const element = dtoIn.productList[index];
-          let obj = checkedList.productList.find((o) => o.id == element.id);
-          if (obj) {
-            dtoOut = await this.dao.update(dtoIn);
+          const element = dtoIn.productList[index];          
+
+            let obj = checkedList.productList?.find((o) => o.id == element.id);
+            if (obj) {
+              try {        
+                dtoOut = await this.dao.update(dtoIn);
+              } catch (e) {
+                if (e instanceof ObjectStoreError) {
+                  throw new Errors.UpdateProduct.ListDaoUpdateProductFailed({ uuAppErrorMap }, e);
+                }
+                throw e;
+              }
+           
           } else {
             throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({ uuAppErrorMap });
           }
@@ -257,8 +266,45 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    
+    dtoIn.awid=awid;
+
+    if (dtoIn.productList?.length) {
+      let checkedList = await this.dao.getById(awid, dtoIn.id);
+      for (let index = 0; index < dtoIn.productList.length; index++) {
+        const element = dtoIn.productList[index];
+        //check in saved list for duplicates
+       
+          let obj = checkedList.productList?.find((o) => o.id == element.id);
+          if (obj) {    
+            throw new Errors.LinkProduct.ProductAlreadyLinkedPresent({ uuAppErrorMap });
+          }
+        
+        //check whether product exists        
+        let check = await this.productDao.getById(awid, element.id);
+        if (check === null) {
+          throw new Errors.LinkProduct.ListDaoProductDoesNotExist({ uuAppErrorMap });
+        } else {
+          dtoIn.productList[index].name = check.name;
+          dtoIn.productList[index].measureUnit = check.measureUnit;
+          dtoIn.productList[index].purchased = false;
+        }
+      }
+      console.log(dtoIn)
+      try {        
+        dtoOut = await this.dao.update(dtoIn);
+        dtoOut.awid = awid;
+        dtoOut.uuAppErrorMap = uuAppErrorMap;
+      } catch (e) {
+        if (e instanceof ObjectStoreError) {
+          throw new Errors.LinkProduct.ListDaoLinkProductFailed({ uuAppErrorMap, e }, e);
+        }
+        throw e;
+      }
+    }
+
+    else throw new Errors.UpdateProduct.NoProductPresent({ uuAppErrorMap });
+
     return dtoOut;
   }
 
