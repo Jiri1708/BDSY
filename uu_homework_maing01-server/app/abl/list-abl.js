@@ -150,8 +150,6 @@ class ListAbl {
       throw e;
     }
 
-
-
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;

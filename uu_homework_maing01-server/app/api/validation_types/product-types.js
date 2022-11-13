@@ -1,6 +1,7 @@
 /* eslint-disable */
 const productUpdateDtoInType = shape({
-    name: uu5String(255).isRequired(),
+  id: uu5String(255).isRequired(),  
+  name: uu5String(255).isRequired(),
     measureUnit: uu5String(10).isRequired()
   });
 

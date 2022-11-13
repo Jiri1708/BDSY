@@ -1,7 +1,7 @@
 "use strict";
 const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
-const { DaoFactory } = require("uu_appg01_server").ObjectStore;
+const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/product-error.js");
 
@@ -21,7 +21,7 @@ class ProductAbl {
 
   constructor() {
     this.validator = Validator.load();
-    // this.dao = DaoFactory.getDao("product");
+    this.dao = DaoFactory.getDao("product");
   }
 
   async update(awid, dtoIn) {
@@ -40,6 +40,21 @@ class ProductAbl {
     let dtoOut = { ...dtoIn };
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+    dtoIn.awid = awid;
+    // DAO 
+    try{
+      dtoOut = await this.dao.update(dtoIn);
+    }
+    catch (e){
+      if (e instanceof ObjectStoreError){
+        throw new Errors.Update.ProductDaoUpdateFailed({uuAppErrorMap}, e);
+      }
+      throw e;
+    }
+
+
+
     return dtoOut;
   }
 
@@ -54,11 +69,32 @@ class ProductAbl {
       WARNINGS.getUnsupportedKeys.code,
       Errors.Get.InvalidDtoIn
     );
-
-    // HDS 2
     let dtoOut = { ...dtoIn };
+    // HDS 2
+   
+    if (!dtoIn.idList?.length){
+      dtoOut = await this.dao.get(awid);
+    }
+    else{
+      dtoOut = {
+        productList: [
+        ],
+        awid: awid,
+        uuAppErrorMap:{}
+      };
+      
+      for (let index = 0; index < dtoIn.idList.length; index++) {
+        let test = await this.dao.getById(awid, dtoIn.idList[index].id);
+        dtoOut.productList.push(test);
+      } 
+     
+    } 
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+      console.log(dtoOut)
+    
+
     return dtoOut;
   }
 
@@ -74,13 +110,28 @@ class ProductAbl {
       Errors.Create.InvalidDtoIn
     );
 
+    
     // HDS 2
     let dtoOut = { ...dtoIn };
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
+    
+    dtoIn.awid = awid;
+    // DAO 
+    try{
+      dtoOut = await this.dao.create(dtoIn);
+    }
+    catch (e){
+      if (e instanceof ObjectStoreError){
+        throw new Errors.Create.ProductDaoCreateFailed({uuAppErrorMap}, e);
+      }
+      throw e;
+    }
     return dtoOut;
   }
 
 }
+
+
 
 module.exports = new ProductAbl();
