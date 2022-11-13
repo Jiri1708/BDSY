@@ -213,30 +213,45 @@ class ListAbl {
     dtoIn.awid = awid;
     // DAO
     try {
-      //
-
       //is productList array empty?
       if (dtoIn.productList?.length) {
         //get saved list
         let checkedList = await this.dao.getById(awid, dtoIn.id);
         //check if productId is present in savedList
-        for (let index = 0; index < dtoIn.productList.length; index++) {
-          const element = dtoIn.productList[index];          
+        for (let index = 0; index < dtoIn.productList.length; index++) 
+        {
+          const element = dtoIn.productList[index];
 
-            let obj = checkedList.productList?.find((o) => o.id == element.id);
-            if (obj) {
-              try {        
-                dtoOut = await this.dao.update(dtoIn);
-              } catch (e) {
-                if (e instanceof ObjectStoreError) {
-                  throw new Errors.UpdateProduct.ListDaoUpdateProductFailed({ uuAppErrorMap }, e);
-                }
-                throw e;
-              }
-           
-          } else {
-            throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({ uuAppErrorMap });
+          let obj = checkedList.productList?.findIndex((o) => o.id == element.id);
+          console.log("-----------")
+          console.log("findIndex test")
+          console.log(obj)
+          console.log("-----------")
+          if (obj< 0) {
+            throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({
+              uuAppErrorMap,
+            });
           }
+
+          checkedList.productList[obj].quantity = element.quantity;
+          checkedList.productList[obj].purchased = element.purchased;
+          
+          
+
+        }
+        dtoIn.productList = checkedList.productList;
+        try {
+          dtoOut = await this.dao.update(dtoIn);
+        } catch (e) {
+          if (e instanceof ObjectStoreError) {
+            throw new Errors.UpdateProduct.ListDaoUpdateProductFailed(
+              {
+                uuAppErrorMap,
+              },
+              e
+            );
+          }
+          throw e;
         }
       }
 
@@ -266,21 +281,22 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
-    
-    dtoIn.awid=awid;
+
+    dtoIn.awid = awid;
 
     if (dtoIn.productList?.length) {
       let checkedList = await this.dao.getById(awid, dtoIn.id);
       for (let index = 0; index < dtoIn.productList.length; index++) {
+        //input value product
         const element = dtoIn.productList[index];
+
         //check in saved list for duplicates
-       
-          let obj = checkedList.productList?.find((o) => o.id == element.id);
-          if (obj) {    
-            throw new Errors.LinkProduct.ProductAlreadyLinkedPresent({ uuAppErrorMap });
-          }
-        
-        //check whether product exists        
+        let obj = checkedList.productList?.find((o) => o.id == element.id);
+        if (obj) {
+          throw new Errors.LinkProduct.ProductAlreadyLinkedPresent({ uuAppErrorMap });
+        }
+
+        //check whether product exists
         let check = await this.productDao.getById(awid, element.id);
         if (check === null) {
           throw new Errors.LinkProduct.ListDaoProductDoesNotExist({ uuAppErrorMap });
@@ -290,8 +306,9 @@ class ListAbl {
           dtoIn.productList[index].purchased = false;
         }
       }
-      console.log(dtoIn)
-      try {        
+      console.log(dtoIn);
+      try {
+        dtoIn.productList = dtoIn.productList.concat(checkedList.productList);
         dtoOut = await this.dao.update(dtoIn);
         dtoOut.awid = awid;
         dtoOut.uuAppErrorMap = uuAppErrorMap;
@@ -301,9 +318,7 @@ class ListAbl {
         }
         throw e;
       }
-    }
-
-    else throw new Errors.UpdateProduct.NoProductPresent({ uuAppErrorMap });
+    } else throw new Errors.UpdateProduct.NoProductPresent({ uuAppErrorMap });
 
     return dtoOut;
   }
