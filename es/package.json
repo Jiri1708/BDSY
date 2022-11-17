@@ -8,5 +8,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "pretty": "prettier --write \"./**/*.{js,jsx,json}\"" 
 }

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import {createVisualComponent, Utils, PropTypes} from "uu5g05";
+import { createVisualComponent, Utils, PropTypes } from "uu5g05";
 import Config from "../config/config.js";
 import "uu5g04-bricks";
 import "uu5chartg01";
@@ -34,7 +34,6 @@ const Charts = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const {children} = props;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -45,24 +44,24 @@ const Charts = createVisualComponent({
     return (
       <>
         <UU5.Bricks.Row className={CSS.main()}>
-          <UU5.SimpleChart.BarChart data={props.dataDtoIn} series={props.seriesDtoIn}/>
+          <UU5.SimpleChart.BarChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
         <UU5.Bricks.Row className={CSS.main()}>
-          <UU5.SimpleChart.LineChart data={props.dataDtoIn} series={props.seriesDtoIn}/>
+          <UU5.SimpleChart.LineChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
         <UU5.Bricks.Row className={CSS.main()}>
-          <UU5.SimpleChart.RadialBarChart data={props.dataDtoIn} series={props.seriesDtoIn}/>
+          <UU5.SimpleChart.RadialBarChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
         <UU5.Bricks.Row className={CSS.main()}>
-          <UU5.SimpleChart.AreaChart data={props.dataDtoIn} series={props.seriesDtoIn}/>
+          <UU5.SimpleChart.AreaChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
       </>
-    )
+    );
     //@@viewOff:render
   },
 });
 
 //@@viewOn:exports
-export {Charts};
+export { Charts };
 export default Charts;
 //@@viewOff:exports
