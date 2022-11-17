@@ -14,7 +14,7 @@ import TableDataProvider from "../bricks/homework_part1_tableData-provider";
 
 const Homework_part2 = createVisualComponent({
   //@@viewOn:statics
-  displayName: Config.TAG + "Homework_part1",
+  displayName: Config.TAG + "Homework_part2",
   //@@viewOff:statics
 
   render() {
