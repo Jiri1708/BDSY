@@ -69,21 +69,28 @@ const ShopTileProvider = createComponent({
         Obchod ${shopTile.name} byl vymazan`,
         });
     }
-    
+   
+  
+  function handleIncrease(shopTile) {
+    let now = new Date();
+    if (now.getHours() >= 6 && now.getHours() < 22) {
+    shopTile.currentValue = parseInt(shopTile.currentValue) + 1;
+    setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
+    } else {
+      UU5.Environment.getPage()
+        .getAlertBus()
+        .addAlert({
+          content: `
+        Centrum je zavreno nyni je ${now}`,
+        });
+    }
 
-    function handleIncrease(shopTile) {
-      shopTile.currentValue = parseInt(shopTile.currentValue) + 1;    
-      setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
+      
 
-      // UU5.Environment.getPage()
-      //   .getAlertBus()
-      //   .addAlert({
-      //     content: `
-      //   Prisel dalsi zakos do obchodu ${shopTile.name} - nyni je to ${shopTile.currentValue+1}`,
-      //   });
+     
     }
     //@@viewOff:private
-console.log("Tesne pred retubr " + shopTiles)
+
     //@@viewOn:render
    
     return children({ shopTiles, handleDelete, handleCreate, handleIncrease });

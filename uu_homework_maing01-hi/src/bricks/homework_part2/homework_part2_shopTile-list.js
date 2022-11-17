@@ -47,7 +47,7 @@ const ShopTileList = createVisualComponent({
           <div>
           Celkem zakazniku: {totalAmount}
           </div>
-          
+
           </div>;
     }
 
@@ -68,7 +68,7 @@ const ShopTileList = createVisualComponent({
               onIncrease={onIncrease}
             />
           ))
-          .sort((x) => x.name)}
+          }
       </div>
     );
     //@@viewOff:render
