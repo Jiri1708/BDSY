@@ -15,11 +15,9 @@ const Homework_part2 = createVisualComponent({
     //@@viewOn:render
     return (
       <div>
-      <RouteBar />
-      <UU5.Bricks.Row>
-        Home work 2
-      </UU5.Bricks.Row>
-    </div>
+        <RouteBar />
+        <UU5.Bricks.Row>Home work 2</UU5.Bricks.Row>
+      </div>
     );
     //@@viewOff:render
   },

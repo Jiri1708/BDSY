@@ -43,5 +43,6 @@
   },
   "prettier": {
     "printWidth": 120
-  }
+  },
+  "pretty": "prettier --write \"./**/*.{js,jsx,json}\"" 
 }

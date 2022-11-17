@@ -35,7 +35,8 @@
     "uuCloudSwap": "uu_appg01_devkit uuCloudSwap",
     "uuCloudLogStoreExport": "uu_appg01_devkit uuCloudLogStoreExport",
     "uuCmdCreate": "uu_appg01_devkit uuCmdCreate",
-    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade"
+    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "main": "app.js",
   "files": [
