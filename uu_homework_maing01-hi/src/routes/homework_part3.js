@@ -21,12 +21,12 @@ const chartSeries = {
   series: [
     {
       valueKey: "pocet",
-      name: "Populace (x 100)",
+      name: "Celková populace (x100)",
       colorSchema: "purple-rich",
     },
     {
       valueKey: "narozeni",
-      name: "Živě narození",
+      name: "Narození",
       colorSchema: "black",
     },
     {
