@@ -7,15 +7,16 @@
   "namespace": "UuHomework",
   "spec": "uu5-app; uu_appg01_devkit@5.5.0",
   "dependencies": {
+    "uu_plus4u5g02": "^1.0.0",
+    "uu_plus4u5g02-app": "^1.0.0",
+    "uu_plus4u5g02-elements": "^1.0.0",
+    "uu5chartg01": "^2.9.5",
     "uu5g04": "^1.0.0",
     "uu5g05": "^1.0.0",
     "uu5g05-browser-compatibility": "^1.0.0",
     "uu5g05-elements": "^1.0.0",
     "uu5g05-forms": "^1.0.0",
-    "uu5loaderg01": "^1.0.0",
-    "uu_plus4u5g02": "^1.0.0",
-    "uu_plus4u5g02-app": "^1.0.0",
-    "uu_plus4u5g02-elements": "^1.0.0"
+    "uu5loaderg01": "^1.0.0"
   },
   "uuBuildSettings": {
     "externals": {}
