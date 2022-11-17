@@ -2,6 +2,7 @@
 import UU5 from "uu5g04";
 import { createVisualComponent } from "uu5g04-hooks";
 import Config from "../config/config";
+import CSS from "./homework_part2_shopTile.css";
 //@@viewOff:imports
 
 const ShopTile = createVisualComponent({
@@ -27,7 +28,7 @@ const ShopTile = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     shopTile: null,
-    colorSchema: "blue",
+    colorSchema: "red",
     onDetail: () => {},
     onUpdate: () => {},
     onDelete: () => {},
@@ -47,28 +48,38 @@ const ShopTile = createVisualComponent({
     console.log(shopTile);
     //@@viewOn:render
     function renderHeader() {
-      return (
-        <>
-          {shopTile.name}
-          <UU5.Bricks.Button onClick={handleDelete} colorSchema="red">
-            <UU5.Bricks.Icon icon="mdi-delete" />
-          </UU5.Bricks.Button>
-          <UU5.Bricks.Button onClick={handleIncrease} colorSchema="green">
-            +1
-          </UU5.Bricks.Button>
-        </>
-      );
+      return <div className={CSS.h1()}>{shopTile.name}</div>;
     }
 
     if (!shopTile) {
-      return <>{shopTile.name}</>;
+      return ;
     }
 
     return (
-      <UU5.Bricks.Card header={renderHeader()} colorSchema={colorSchema}>
-        <div>{shopTile.currentValue}</div>
-        <div>{shopTile.maxValue}</div>
+      // <div className={CSS.main()}>
+      <UU5.Bricks.Card
+        header={renderHeader()}
+        inline={true}
+        borderRadius="8px"
+        bgStyle="filled"
+        width={300}
+        className={CSS.main()}
+      >
+        Aktualní počet zákazníků: <div>{shopTile.currentValue}</div>
+        Maximální počet zákazníků: <div>{shopTile.maxValue}</div>
+        <div className={CSS.btnGroupWrap()}>
+
+        <UU5.Bricks.ButtonGroup className={CSS.btnGroup()}>
+          <UU5.Bricks.Button onClick={handleDelete} colorSchema="red">
+            <UU5.Bricks.Icon icon="mdi-delete" />
+          </UU5.Bricks.Button>
+          <UU5.Bricks.Button  onClick={handleIncrease} colorSchema="green">
+            +1
+          </UU5.Bricks.Button>
+        </UU5.Bricks.ButtonGroup>
+        </div>
       </UU5.Bricks.Card>
+      // </div>
     );
     //@@viewOff:render
   },

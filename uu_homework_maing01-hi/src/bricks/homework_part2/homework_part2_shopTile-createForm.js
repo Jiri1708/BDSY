@@ -29,8 +29,8 @@ const ShopTileCreateForm = createVisualComponent({
     return (
       <UU5.Forms.Form onSave={onSave} onCancel={onCancel}>
         <UU5.Forms.Text label="Nazev" name="name" />
-        <UU5.Forms.Number label="Initial Value" name="currentValue" />
-        <UU5.Forms.Number label="Max Value" name="maxValue" />
+        <UU5.Forms.Number label="Initial Value" name="currentValue" min={0}value={0} />
+        <UU5.Forms.Number label="Max Value" name="maxValue"min={1} value={1} />
         <UU5.Forms.Controls />
       </UU5.Forms.Form>
     );

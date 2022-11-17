@@ -72,7 +72,7 @@ const ShopTileProvider = createComponent({
     
 
     function handleIncrease(shopTile) {
-      shopTile.currentValue +=1;    
+      shopTile.currentValue = parseInt(shopTile.currentValue) + 1;    
       setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
 
       // UU5.Environment.getPage()
