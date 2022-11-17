@@ -6,7 +6,9 @@ import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
-import Homework_part1 from "../routes/homework_part1";
+import Homework_part1 from "../routes/homework_part1.js";
+import Homework_part2 from "../routes/homework_part2.js";
+import Homework_part3 from "../routes/homework_part3.js";
 
 //@@viewOff:imports
 
@@ -20,6 +22,8 @@ const ROUTE_MAP = {
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   homework_part1: (props) => <Homework_part1 {...props} />,
+  homework_part2: (props) => <Homework_part2 {...props} />,
+  homework_part3: (props) => <Homework_part3 {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

@@ -4,12 +4,6 @@ import Config from "./config/config";
 import RouteBar from "../core/route-bar";
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
-import LectorCard from "../bricks/homework_part1_lectorCard";
-import Graph from "../bricks/homework_part1_graph";
-import SquareList from "../bricks/homework_part1_squares-list";
-import SquareProvider from "../bricks/homework_part1_squares-provider";
-import Table from "../bricks/homework_part1_table";
-import TableDataProvider from "../bricks/homework_part1_tableData-provider";
 //@@viewOff:imports
 
 const Homework_part2 = createVisualComponent({
@@ -21,30 +15,11 @@ const Homework_part2 = createVisualComponent({
     //@@viewOn:render
     return (
       <div>
-        <RouteBar />
-        <UU5.Bricks.Row>
-          <SquareProvider>
-            {({ squares }) => {
-              return <SquareList squares={squares} />;
-            }}
-          </SquareProvider>
-        </UU5.Bricks.Row>
-        <UU5.Bricks.Row>
-          <UU5.Bricks.Column colWidth="xs-6 s-6 m-6">
-            <LectorCard />
-          </UU5.Bricks.Column>
-          <UU5.Bricks.Column colWidth="xs-6 s-6 m-6">
-            <Graph />
-          </UU5.Bricks.Column>
-        </UU5.Bricks.Row>
-        <UU5.Bricks.Row>
-          <TableDataProvider>
-            {({ data }) => {
-              return <Table data={data} />;
-            }}
-          </TableDataProvider>
-        </UU5.Bricks.Row>
-      </div>
+      <RouteBar />
+      <UU5.Bricks.Row>
+        Home work 2
+      </UU5.Bricks.Row>
+    </div>
     );
     //@@viewOff:render
   },
