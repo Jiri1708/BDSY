@@ -1,10 +1,10 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createComponent } from "uu5g04-hooks";
+import { createComponent, useState } from "uu5g04-hooks";
 import Config from "../config/config";
 //@@viewOff:imports
 
-let shopTiles = [
+let initialShopTiles = [
   {
     id: 1,
     name: "Globus",
@@ -44,8 +44,23 @@ const ShopTileProvider = createComponent({
 
   render({ children }) {
     //@@viewOn:private
+    const [shopTiles, setShopTiles] = useState(initialShopTiles);
+
+     function handleCreate(shopTile) {
+       shopTile.id = UU5.Common.Tools.generateUUID();
+       setShopTiles((prevShopTiles) => prevShopTiles.concat([shopTile]));
+
+        UU5.Environment.getPage()
+          .getAlertBus()
+          .addAlert({
+            content: `
+        Obchod ${shopTile.name} byl prdian`,
+          });
+     }
+
     function handleDelete(shopTile) {
-      shopTiles = shopTile.filter((item) => item.id !== shopTile.id);
+      setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id));
+      
 
       UU5.Environment.getPage()
         .getAlertBus()
@@ -54,10 +69,24 @@ const ShopTileProvider = createComponent({
         Obchod ${shopTile.name} byl vymazan`,
         });
     }
-    //@@viewOff:private
+    
 
+    function handleIncrease(shopTile) {
+      shopTile.currentValue +=1;    
+      setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
+
+      // UU5.Environment.getPage()
+      //   .getAlertBus()
+      //   .addAlert({
+      //     content: `
+      //   Prisel dalsi zakos do obchodu ${shopTile.name} - nyni je to ${shopTile.currentValue+1}`,
+      //   });
+    }
+    //@@viewOff:private
+console.log("Tesne pred retubr " + shopTiles)
     //@@viewOn:render
-    return children({ shopTiles, handleDelete });
+   
+    return children({ shopTiles, handleDelete, handleCreate, handleIncrease });
     //@@viewOff:render
   },
 });

@@ -26,10 +26,12 @@ const ShopTileList = createVisualComponent({
     onDetail: () => {},
     onUpdate: () => {},
     onDelete: () => {},
+    onIncrease: () => {},
   },
   //@@viewOff:defaultProps
 
-  render({ shopTiles, onDetail, onUpdate, onDelete }) {
+  render({ shopTiles, onDetail, onUpdate, onDelete, onIncrease }) {
+    console.log(shopTiles);
     //@@viewOn:render
     if (shopTiles.length === 0) {
       return <UU5.Common.Error content="No shopTiles!" />;
@@ -45,8 +47,9 @@ const ShopTileList = createVisualComponent({
             onDetail={onDetail}
             onUpdate={onUpdate}
             onDelete={onDelete}
+            onIncrease={onIncrease}
           />
-        ))}
+        )).sort(x=> x.name)}
       </div>
     );
     //@@viewOff:render

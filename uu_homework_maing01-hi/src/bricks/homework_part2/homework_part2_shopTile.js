@@ -20,6 +20,7 @@ const ShopTile = createVisualComponent({
     onDetail: UU5.PropTypes.func,
     onUpdate: UU5.PropTypes.func,
     onDelete: UU5.PropTypes.func,
+    onIncrease: UU5.PropTypes.func,
   },
   //@@viewOff:propTypes
 
@@ -30,16 +31,20 @@ const ShopTile = createVisualComponent({
     onDetail: () => {},
     onUpdate: () => {},
     onDelete: () => {},
+    onIncrease: () => {},
   },
   //@@viewOff:defaultProps
 
-  render({ shopTile, colorSchema, onDelete }) {
+  render({ shopTile, colorSchema, onDelete, onIncrease }) {
     //@@viewOn:private
     function handleDelete() {
       onDelete(shopTile);
     }
+     function handleIncrease() {
+       onIncrease(shopTile);
+     }
     //@@viewOff:private
-console.log(shopTile)
+    console.log(shopTile);
     //@@viewOn:render
     function renderHeader() {
       return (
@@ -48,13 +53,15 @@ console.log(shopTile)
           <UU5.Bricks.Button onClick={handleDelete} colorSchema="red">
             <UU5.Bricks.Icon icon="mdi-delete" />
           </UU5.Bricks.Button>
+          <UU5.Bricks.Button onClick={handleIncrease} colorSchema="green">
+            +1
+          </UU5.Bricks.Button>
         </>
       );
     }
 
     if (!shopTile) {
-      return (<>
-      {shopTile.name}</>);
+      return <>{shopTile.name}</>;
     }
 
     return (
