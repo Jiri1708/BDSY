@@ -73,10 +73,27 @@ const ShopTileProvider = createComponent({
   
   function handleIncrease(shopTile) {
     let now = new Date();
-    if (now.getHours() >= 6 && now.getHours() < 22) {
-    shopTile.currentValue = parseInt(shopTile.currentValue) + 1;
-    setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
-    } else {
+    if (now.getHours() >= 6 && now.getHours() < 22) 
+    {
+      if (shopTile.currentValue < shopTile.maxValue)
+      {
+        shopTile.currentValue = parseInt(shopTile.currentValue) + 1;
+        setShopTiles((prevShopTiles) => prevShopTiles.filter((item) => item.id !== shopTile.id).concat([shopTile]));
+      }
+      else 
+      {
+       return UU5.Environment.getPage()
+         .getAlertBus()
+         .addAlert({
+           content: `
+        Obchod ${shopTile.name} je plny`,
+         });
+          
+      }
+    }
+
+    else 
+    {
       UU5.Environment.getPage()
         .getAlertBus()
         .addAlert({
