@@ -119,12 +119,16 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-self["webpackHotUpdate_name_"]("index",{},
-/******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ /* webpack/runtime/getFullHash */
-/******/ !function() {
-/******/ 	__webpack_require__.h = function() { return "b697eded2a201dec8fe6"; }
-/******/ }();
-/******/ 
-/******/ }
-);
+(self["__webpack_jsonp_uu_homework_maing01_hi_0_1_0_index"] = self["__webpack_jsonp_uu_homework_maing01_hi_0_1_0_index"] || []).push([["lsi_cs_json"],{
+
+/***/ "./lsi/cs.json":
+/*!*********************!*\
+  !*** ./lsi/cs.json ***!
+  \*********************/
+/***/ (function(module) {
+
+module.exports = JSON.parse('{"appName":"Aplikace uuHomework","About":{"header":"O aplikaci uuHomework","creatorsHeader":"Tvůrci aplikace","termsOfUse":"Podmínky užívání"},"AboutContent":{"content":"<uu5string/>Demo aplikace je šablona pro vývoj nových aplikací.","technologiesContent":"<uu5string/>Dále byly použity technologie: <Uu5Elements.Link href=\'http://www.w3schools.com/html/default.asp\' target=\'_blank\'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href=\'http://www.w3schools.com/css/default.asp\' target=\'_blank\'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href=\'http://www.w3schools.com/js/default.asp\' target=\'_blank\'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href=\'http://getbootstrap.com\' target=\'_blank\'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href=\'https://reactjs.org\' target=\'_blank\'>React</Uu5Elements.Link>, <Uu5Elements.Link href=\'https://www.ruby-lang.org\' target=\'_blank\'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href=\'http://puma.io\' target=\'_blank\'>Puma</Uu5Elements.Link> a <Uu5Elements.Link href=\'https://www.docker.com\' target=\'_blank\'>Docker</Uu5Elements.Link>. Aplikace je provozována v rámci internetové služby <Uu5Elements.Link href=\'https://plus4u.net\' target=\'_blank\'>Plus4U</Uu5Elements.Link> s využitím cloudu <Uu5Elements.Link href=\'https://azure.microsoft.com\' target=\'_blank\'>Microsoft Azure</Uu5Elements.Link>."},"ControlPanel":{"rightsError":"K zobrazení komponenty nemáte dostatečná práva.","btNotConnected":"Aplikace není napojená na Business Territory."},"Home":{"welcome":"Vítejte","intro":"<uu5string/>Tato šablona obsahuje připravenou klientskou a serverovou část. Jednotlivé komponety, které jsou zde zobrazeny, jsou určeny k tomu, aby demonstrovaly možnosti a způsob použití. Je vhodné je upravit, zkopírovat či smazat pro potřeby vyvíjené aplikace. Více o struktuře uuApp se dozvíte v dokumetaci viz&nbsp; <Uu5Elements.Link href=\\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book\\" target=\\"_blank\\" >uuAppDevKit</Uu5Elements.Link>.","clientSide":"<uu5string/>Klientská část je implementovaná s využitím komponent z knihoven <Uu5Elements.Link href=\\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\\" target=\\"_blank\\">uu5</Uu5Elements.Link> a <Uu5Elements.Link href=\\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\\" target=\\"_blank\\">uuPlus4U5</Uu5Elements.Link>.","serverSide":"<uu5string/>Pro spuštení serverové části je potřeba provést inicializaci workspace podle návodu viz <Uu5Elements.Link href=\\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\\" target=\\"_blank\\">uuApp Template Developer Guide</Uu5Elements.Link>"},"InitAppWorkspace":{"notAuthorized":"Nemáte dostatečná práva k použití aplikace.","formHeader":"Inicializovat aplikaci","formHeaderInfo":"<uu5string/>Vaše uuApp běží, ale vyžaduje inicializaci. Pokud potřebujete pomoci s vyplněním tohoto formuláře, podívejte se do\\n<Uu5Elements.Link target=\\"_blank\\" href=\\"#\\">Dokumentace</Uu5Elements.Link>.","notAuthorizedForInit":"Aplikace běží, ale ještě nebyla inicializována a nemáte práva ji inicializovat.","uuBtLocationUriLabel":"Umístění uuBusinessTerritory","uuBtLocationUriInfo":"Uri uuBt umístění kam bude založen AWSC","nameLabel":"Název","initialize":"Inicializovat"},"Menu":{"home":"Vítejte","about":"O aplikaci","homework_part1":"Domácí úkol 1","homework_part2":"Domácí úkol 2","homework_part3":"Domácí úkol 3"}}');
+
+/***/ })
+
+}]);

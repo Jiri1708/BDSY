@@ -32,6 +32,8 @@
   "Menu": {
     "home": "Vítejte",
     "about": "O aplikaci",
-    "homework_part1": "Domácí úkol 1"
+    "homework_part1": "Domácí úkol 1",
+    "homework_part2": "Domácí úkol 2",
+    "homework_part3": "Domácí úkol 3"
   }
 }

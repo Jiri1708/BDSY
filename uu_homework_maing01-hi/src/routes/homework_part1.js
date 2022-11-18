@@ -4,12 +4,12 @@ import Config from "./config/config";
 import RouteBar from "../core/route-bar";
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
-import LectorCard from "../bricks/homework_part1_lectorCard";
-import Graph from "../bricks/homework_part1_graph";
-import SquareList from "../bricks/homework_part1_squares-list";
-import SquareProvider from "../bricks/homework_part1_squares-provider";
-import Table from "../bricks/homework_part1_table";
-import TableDataProvider from "../bricks/homework_part1_tableData-provider";
+import LectorCard from "../bricks/homework_part1/homework_part1_lectorCard";
+import Graph from "../bricks/homework_part1/homework_part1_graph";
+import SquareList from "../bricks/homework_part1/homework_part1_squares-list";
+import SquareProvider from "../bricks/homework_part1/homework_part1_squares-provider";
+import Table from "../bricks/homework_part1/homework_part1_table";
+import TableDataProvider from "../bricks/homework_part1/homework_part1_tableData-provider";
 //@@viewOff:imports
 
 const Homework_part1 = createVisualComponent({

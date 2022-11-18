@@ -1,4 +1,4 @@
-import Config from "./config/config";
+import Config from "../config/config";
 
 const main = () => Config.Css.css`
 border: 1px solid black;

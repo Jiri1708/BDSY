@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
 import { createVisualComponent } from "uu5g04-hooks";
-import Config from "./config/config";
+import Config from "../config/config";
 import Square from "./homework_part1_squares";
 //@@viewOff:imports
 

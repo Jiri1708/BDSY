@@ -2,9 +2,9 @@
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
 import { createVisualComponent } from "uu5g04-hooks";
-import Config from "./config/config";
-import image from "../assets/graph.png";
-import CSS from "./homework_part1_graph.css";
+import Config from "../config/config";
+import image from "../../assets/graph.png";
+import CSS from "./homework_part1_graph.css.js";
 //@@viewOff:imports
 
 const Graph = createVisualComponent({
