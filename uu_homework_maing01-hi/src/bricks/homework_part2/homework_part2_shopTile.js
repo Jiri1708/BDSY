@@ -55,6 +55,17 @@ const ShopTile = createVisualComponent({
       return ;
     }
 
+    
+    function checkForSpace(){
+      return shopTile.currentValue >= shopTile.maxValue
+  }
+
+  function isShopAvailable(){
+      
+    
+    return checkForSpace()? "red":"green";
+  }
+
     return (
       // <div className={CSS.main()}>
       <UU5.Bricks.Card
@@ -64,19 +75,19 @@ const ShopTile = createVisualComponent({
         bgStyle="filled"
         width={300}
         className={CSS.main()}
+        colorSchema={isShopAvailable()}
       >
         Aktualní počet zákazníků: <div>{shopTile.currentValue}</div>
         Maximální počet zákazníků: <div>{shopTile.maxValue}</div>
         <div className={CSS.btnGroupWrap()}>
-
-        <UU5.Bricks.ButtonGroup className={CSS.btnGroup()}>
-          <UU5.Bricks.Button onClick={handleDelete} colorSchema="red">
-            <UU5.Bricks.Icon icon="mdi-delete" />
-          </UU5.Bricks.Button>
-          <UU5.Bricks.Button  onClick={handleIncrease} colorSchema="green">
-            +1
-          </UU5.Bricks.Button>
-        </UU5.Bricks.ButtonGroup>
+          <UU5.Bricks.ButtonGroup className={CSS.btnGroup()}>
+            <UU5.Bricks.Button onClick={handleDelete} colorSchema="red">
+              <UU5.Bricks.Icon icon="mdi-delete" />
+            </UU5.Bricks.Button>
+            <UU5.Bricks.Button onClick={handleIncrease} colorSchema="green" disabled={checkForSpace()}>
+              +1
+            </UU5.Bricks.Button>
+          </UU5.Bricks.ButtonGroup>
         </div>
       </UU5.Bricks.Card>
       // </div>
