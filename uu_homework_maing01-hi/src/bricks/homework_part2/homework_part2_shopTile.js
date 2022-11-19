@@ -28,7 +28,7 @@ const ShopTile = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     shopTile: null,
-    colorSchema: "red",
+    colorSchema: "green",
     onDetail: () => {},
     onUpdate: () => {},
     onDelete: () => {},
