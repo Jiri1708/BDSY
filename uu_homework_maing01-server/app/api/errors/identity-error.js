@@ -1,6 +1,5 @@
 "use strict";
 
-const { assignRole } = require("../controllers/identity-controller.js");
 const HomeworkMainUseCaseError = require("./homework-main-use-case-error.js");
 const IDENTITY_ERROR_PREFIX = `${HomeworkMainUseCaseError.ERROR_PREFIX}identity/`;
 

@@ -1,9 +1,9 @@
 {
-  "asid_license_owner_list": ["3627-8321-1"],
+  "asid_license_owner_list": ["14-2710-1"],
   "asid": "11111111111111111111111111111111",
   "sysUuAppWorkspace": {
     "awid": "22222222222222222222222222222222",
-    "awidLicenseOwnerList": ["3627-8321-1"]
+    "awidLicenseOwnerList": ["14-2710-1"]
   },
   "userMap": {
     "AsidLicenseOwner": {
@@ -24,7 +24,19 @@
     "Authorities": {
       "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
       "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
-      "uuIdentity": "3627-8321-1",
+      "uuIdentity": "14-2710-1",
+      "profileList": ["Authorities"]
+    },
+    "Owner": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "14-2710-1",
+      "profileList": ["Authorities"]
+    },
+    "Contributor": {
+      "accessCode1": "3yMhD1qzi0JUwsAJ7UOsWX2YtrGH_Olk5DxgWyssNW6e_WC4wjKrXODHES92cQXp",
+      "accessCode2": "Cq%iaz#9w-#z7C8yZlZoC$DsebIK2JGWyDK8lg8J7vLFSKXtYFt5tn3eI3WthZtI",
+      "uuIdentity": "14-2710-1",
       "profileList": ["Authorities"]
     }
   },
