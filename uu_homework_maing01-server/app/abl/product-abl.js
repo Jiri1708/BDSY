@@ -36,9 +36,7 @@ class ProductAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-
+    
     dtoIn.awid = awid;
     // DAO
     try {
@@ -49,6 +47,8 @@ class ProductAbl {
       }
       throw e;
     }
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
 
     return dtoOut;
   }
