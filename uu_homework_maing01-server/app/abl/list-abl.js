@@ -35,6 +35,7 @@ class ListAbl {
     this.productDao = DaoFactory.getDao("product");
   }
 
+  //unit tests done
   async delete(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listDeleteDtoInType", dtoIn);
@@ -66,6 +67,7 @@ class ListAbl {
 
     return dtoOut;
   }
+  //unit tests done
   async update(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listUpdateDtoInType", dtoIn);
@@ -95,7 +97,7 @@ class ListAbl {
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
-
+  //unit tests done
   async create(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listCreateDtoInType", dtoIn);
@@ -170,26 +172,6 @@ class ListAbl {
       if (!list) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
     dtoOut.lists = list;
-    return dtoOut;
-  }
-
-  //#region Dummy methods
-  async getProducts(awid, dtoIn) {
-    // HDS 1.1
-    let validationResult = this.validator.validate("listGetProductDtoInType", dtoIn);
-
-    // HDS 1.2, 1.3 // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      WARNINGS.getProductsUnsupportedKeys.code,
-      Errors.GetProducts.InvalidDtoIn
-    );
-
-    // HDS 2
-    let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
   async updateProduct(awid, dtoIn) {
@@ -296,7 +278,7 @@ class ListAbl {
           dtoIn.productList[index].purchased = false;
         }
       }
-      
+
       try {
         dtoIn.productList = dtoIn.productList.concat(checkedList.productList);
         dtoOut = await this.dao.update(dtoIn);
@@ -312,7 +294,26 @@ class ListAbl {
 
     return dtoOut;
   }
+  
+  //#region Dummy methods
+  async getProducts(awid, dtoIn) {
+    // HDS 1.1
+    let validationResult = this.validator.validate("listGetProductDtoInType", dtoIn);
 
+    // HDS 1.2, 1.3 // A1, A2
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.getProductsUnsupportedKeys.code,
+      Errors.GetProducts.InvalidDtoIn
+    );
+
+    // HDS 2
+    let dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    return dtoOut;
+  }
   //#endregion
 }
 
