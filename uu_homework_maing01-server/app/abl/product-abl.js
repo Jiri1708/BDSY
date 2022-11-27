@@ -88,7 +88,7 @@ class ProductAbl {
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
 
-    console.log(dtoOut);
+   
 
     return dtoOut;
   }

@@ -1,11 +1,13 @@
 const { TestHelper } = require("uu_appg01_server-test");
-const {Errors} = require("../../app/api/errors/list-error");
 
 beforeAll(async () => {
   await TestHelper.setup({ authEnabled: false, sysStatesEnabled: false });
   await TestHelper.initUuSubAppInstance();
   await TestHelper.createUuAppWorkspace();
   await TestHelper.initUuAppWorkspace({ uuAppProfileAuthorities: "urn:uu:GGALL" });
+  await TestHelper.executePostCommand("product/create", { name: "Mouka", measureUnit: "kg" });
+  await TestHelper.executePostCommand("product/create", { name: "Cukr", measureUnit: "kg" });
+  await TestHelper.executePostCommand("product/create", { name: "Kava", measureUnit: "kg" });
 });
 
 afterAll(async () => {
@@ -25,6 +27,27 @@ describe("Create LIST", () => {
     expect(result.status).toEqual(200);
     expect(result.data.uuAppErrorMap).toBeDefined();
   }),
+    test("Happy Path - products added", async () => {
+      let products = await TestHelper.executeGetCommand("product/get");
+      let dtoIn = {
+        name: "Alza 27.12",
+        ownerId: "3627-8321-1",
+        productList: [],
+      };
+      for (let index = 0; index < products.length; index++) {
+        const element = products[index];
+        dtoIn.productList.push({
+          id: element.id,
+          quantity: Math.random(),
+          purchased: false,
+        });
+      }
+
+      let result = await TestHelper.executePostCommand("list/create", dtoIn);
+
+      expect(result.status).toEqual(200);
+      expect(result.data.uuAppErrorMap).toBeDefined();
+    }),
     test("Alternative productDoesNotExists", async () => {
       let dtoIn = {
         name: "Alza 27.12",
@@ -32,15 +55,46 @@ describe("Create LIST", () => {
         productList: [{ id: "46546", quantity: 444, purchased: false }],
       };
 
-      //let result = await TestHelper.executePostCommand("list/create", dtoIn);
-      expect(async () => await TestHelper.executePostCommand("list/create", dtoIn)).rejects.toThrow(
-      );
-
-      // expect(function () {
-      //   result;
-      // }).toThrow(Errors.UpdateProduct.ListDaoProductDoesNotExist);
-
-      //expect(result.status).toThrow("ApplicationError: Update of products went wrong: Unknown productId");
-      // expect(result.data.uuAppErrorMap.message).toEqual("Update of products went wrong: Unknown productId");
+      try {
+        await TestHelper.executePostCommand("list/create", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Selected product does not exist");
+        expect(error.status).toEqual(400);
+      }
     });
 });
+
+describe("Update LIST", () => {
+  test("Happy Path - no products added", async () => {
+    let lists = await TestHelper.executeGetCommand("list/get");    
+
+    let dtoIn = {
+      name: "Test1",
+      ownerId: "3627-8321-1",
+      id: lists.lists.itemList[0].id,
+    };
+
+    let result = await TestHelper.executePostCommand("list/update", dtoIn);
+
+    expect(result.status).toEqual(200);
+    expect(result.data.uuAppErrorMap).toBeDefined();
+      expect(result.data.name).toBe("Test1");
+  })
+  ,
+    test("Alternative fail", async () => {
+      let dtoIn = {
+        name: "Test1",
+        ownerId: "3627-8321-1",
+        id: "445asd",
+      };
+
+      try {
+        await TestHelper.executePostCommand("list/update", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Update of list failed");
+        expect(error.status).toEqual(400);
+      }
+    });
+});
+
+

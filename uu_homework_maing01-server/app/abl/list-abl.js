@@ -116,7 +116,7 @@ class ListAbl {
         const element = dtoIn.productList[index];
         let check = await this.productDao.getById(awid, element.id);
         if (check === null) {
-          throw new Errors.Create.ListDaoProductDoesNotExist({ uuAppErrorMap });
+          throw new Errors.Create.ListDaoCreateProductDoesNotExistFailed({ uuAppErrorMap });
         } else {
           dtoIn.productList[index].name = check.name;
           dtoIn.productList[index].measureUnit = check.measureUnit;
@@ -169,7 +169,6 @@ class ListAbl {
       list = await this.dao.get(awid);
       if (!list) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
-    console.log(uuAppErrorMap);
     dtoOut.lists = list;
     return dtoOut;
   }
@@ -220,10 +219,7 @@ class ListAbl {
           const element = dtoIn.productList[index];
 
           let obj = checkedList.productList?.findIndex((o) => o.id == element.id);
-          console.log("-----------");
-          console.log("findIndex test");
-          console.log(obj);
-          console.log("-----------");
+
           if (obj < 0) {
             throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({
               uuAppErrorMap,
@@ -300,7 +296,7 @@ class ListAbl {
           dtoIn.productList[index].purchased = false;
         }
       }
-      console.log(dtoIn);
+      
       try {
         dtoIn.productList = dtoIn.productList.concat(checkedList.productList);
         dtoOut = await this.dao.update(dtoIn);

@@ -10,8 +10,6 @@ class ProductMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
   async get(awid, pageInfo={}) {
-    console.log(awid);
-    console.log();
     return await super.find({awid}, pageInfo);
   }
   async getById(awid, id) {

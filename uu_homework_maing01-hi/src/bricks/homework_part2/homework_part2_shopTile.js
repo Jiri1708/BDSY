@@ -45,7 +45,7 @@ const ShopTile = createVisualComponent({
        onIncrease(shopTile);
      }
     //@@viewOff:private
-    console.log(shopTile);
+   
     //@@viewOn:render
     function renderHeader() {
       return <div className={CSS.h1()}>{shopTile.name}</div>;

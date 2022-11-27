@@ -10,8 +10,7 @@ class ListMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
   async get(awid, pageInfo={}) {
-    console.log(awid);
-    console.log();
+   
     return await super.find({awid}, pageInfo);
   }
   async getById(awid, id) {
@@ -29,10 +28,7 @@ class ListMongo extends UuObjectDao {
     return await super.deleteOne(filter);
   }
   async update(uuObject) {
-    console.log("DAO method")
-    console.log("DAO method")
-    console.log("----------")
-    console.log(uuObject)
+  
     
     let filter = {
       awid: uuObject.awid,

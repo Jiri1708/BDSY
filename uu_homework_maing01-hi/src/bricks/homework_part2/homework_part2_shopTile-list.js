@@ -32,7 +32,7 @@ const ShopTileList = createVisualComponent({
   //@@viewOff:defaultProps
 
   render({ shopTiles, onDetail, onUpdate, onDelete, onIncrease }) {
-    console.log(shopTiles);
+    
     //@@viewOn:render
     if (shopTiles.length === 0) {
       return <UU5.Common.Error content="No shopTiles!" />;
