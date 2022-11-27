@@ -1,5 +1,4 @@
 const { TestHelper } = require("uu_appg01_server-test");
-const { update } = require("../../app/abl/list-abl");
 const dtoIn1 = {
   name: "Mouka",
   measureUnit: "kg",
