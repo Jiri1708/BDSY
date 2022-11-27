@@ -48,7 +48,7 @@
       },
       "list/delete": {
         "realization": "api/controllers/ListController.delete",
-        "httpMethod": "DELETE",
+        "httpMethod": "POST",
         "type": "CMD"
       },
       "list/linkProduct": {

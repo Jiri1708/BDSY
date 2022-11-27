@@ -61,6 +61,19 @@ describe("Create LIST", () => {
         expect(error.message).toEqual("Selected product does not exist");
         expect(error.status).toEqual(400);
       }
+    }),
+    test("Alternative invalidDtoIn", async () => {
+      let dtoIn = {
+        ownerId: "3627-",
+        productList: [{ id: "46546", quantity: 444, purchased: false }],
+      };
+
+      try {
+        await TestHelper.executePostCommand("list/create", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
+        expect(error.status).toEqual(400);
+      }
     });
 });
 
@@ -93,6 +106,18 @@ describe("Update LIST", () => {
         expect(error.message).toEqual("Update of list failed");
         expect(error.status).toEqual(400);
       }
+    }),
+    test("Alternative fail - dtoIn", async () => {
+      let dtoIn = {};
+
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/update", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
+        expect(error.status).toEqual(400);
+      }
     });
 });
 
@@ -114,7 +139,7 @@ describe("Delete LIST", () => {
     lists = lists.lists.itemList.filter((x) => x.id == dtoIn.id);
     expect(lists).toEqual([]);
   }),
-    test("Alternative fail", async () => {
+    test("Alternative fail - invalid Id", async () => {
       let dtoIn = {
         id: "4465asd",
       };
@@ -125,6 +150,21 @@ describe("Delete LIST", () => {
         await TestHelper.executePostCommand("list/delete", dtoIn);
       } catch (error) {
         expect(error.message).toEqual("Specified ID does not exists");
+        expect(error.status).toEqual(400);
+      }
+    })
+    ,
+    test("Alternative fail - dtoIn", async () => {
+      let dtoIn = {
+        
+      };
+
+      expect.assertions(2);
+     
+      try {
+        await TestHelper.executePostCommand("list/delete", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
         expect(error.status).toEqual(400);
       }
     });

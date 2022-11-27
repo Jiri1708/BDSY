@@ -93,7 +93,7 @@ describe("Update Product", () => {
     expect(updatedProduct.data.name).toBe("test1");
     expect(updatedProduct.data.measureUnit).toBe("test1MS");
   }),
-    test("Alternative scenario - update", async () => {
+    test("Alternative scenario invalid ID - update", async () => {
       let dtoIn = {
         id: "4444",
         name: "test1 fail",
@@ -104,6 +104,18 @@ describe("Update Product", () => {
         await TestHelper.executePostCommand("product/update", dtoIn);
       } catch (error) {
         expect(error.message).toEqual("Update of product failed");
+        expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative scenario invalid dtoIn- update", async () => {
+      let dtoIn = {
+        measureUnit: "g",
+      };
+      expect.assertions(2);
+      try {
+        await TestHelper.executePostCommand("product/update", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
         expect(error.status).toEqual(400);
       }
     });
