@@ -1,6 +1,4 @@
 "use strict";
-const { Console } = require("console");
-const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
@@ -118,7 +116,7 @@ class ListAbl {
         const element = dtoIn.productList[index];
         let check = await this.productDao.getById(awid, element.id);
         if (check === null) {
-          throw new Errors.UpdateProduct.ListDaoProductDoesNotExist({ uuAppErrorMap });
+          throw new Errors.Create.ListDaoProductDoesNotExist({ uuAppErrorMap });
         } else {
           dtoIn.productList[index].name = check.name;
           dtoIn.productList[index].measureUnit = check.measureUnit;
@@ -218,16 +216,15 @@ class ListAbl {
         //get saved list
         let checkedList = await this.dao.getById(awid, dtoIn.id);
         //check if productId is present in savedList
-        for (let index = 0; index < dtoIn.productList.length; index++) 
-        {
+        for (let index = 0; index < dtoIn.productList.length; index++) {
           const element = dtoIn.productList[index];
 
           let obj = checkedList.productList?.findIndex((o) => o.id == element.id);
-          console.log("-----------")
-          console.log("findIndex test")
-          console.log(obj)
-          console.log("-----------")
-          if (obj< 0) {
+          console.log("-----------");
+          console.log("findIndex test");
+          console.log(obj);
+          console.log("-----------");
+          if (obj < 0) {
             throw new Errors.UpdateProduct.ListDaoProductNotLinkedToList({
               uuAppErrorMap,
             });
@@ -235,9 +232,6 @@ class ListAbl {
 
           checkedList.productList[obj].quantity = element.quantity;
           checkedList.productList[obj].purchased = element.purchased;
-          
-          
-
         }
         dtoIn.productList = checkedList.productList;
         try {

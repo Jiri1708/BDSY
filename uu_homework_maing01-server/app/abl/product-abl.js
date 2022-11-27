@@ -1,5 +1,4 @@
 "use strict";
-const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
@@ -83,7 +82,7 @@ class ProductAbl {
 
       for (let index = 0; index < dtoIn.idList.length; index++) {
         let test = await this.dao.getById(awid, dtoIn.idList[index].id);
-        dtoOut.productList.push(test);
+        if (test) dtoOut.productList.push(test);
       }
     }
     dtoOut.awid = awid;
@@ -108,8 +107,6 @@ class ProductAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
 
     dtoIn.awid = awid;
     // DAO
@@ -121,6 +118,8 @@ class ProductAbl {
       }
       throw e;
     }
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
 }
