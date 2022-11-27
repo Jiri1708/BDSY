@@ -19,11 +19,9 @@ beforeAll(async () => {
   await TestHelper.createUuAppWorkspace();
   await TestHelper.initUuAppWorkspace({ uuAppProfileAuthorities: "urn:uu:GGALL" });
 });
-
 afterAll(async () => {
   await TestHelper.teardown();
 });
-
 describe("Create Product", () => {
   test("Happy Path", async () => {
     let result = await TestHelper.executePostCommand("product/create", dtoIn1);
@@ -37,7 +35,7 @@ describe("Create Product", () => {
         testing: false,
         measureUnit: 1,
       };
-
+      expect.assertions(2);
       try {
         await TestHelper.executePostCommand("product/create", dtoIn);
       } catch (error) {
@@ -46,7 +44,6 @@ describe("Create Product", () => {
       }
     });
 });
-
 describe("Get Product", () => {
   test("Happy Path - list", async () => {
     await TestHelper.executePostCommand("product/create", dtoIn2);
@@ -79,35 +76,35 @@ describe("Get Product", () => {
       expect(result.data.uuAppErrorMap).toEqual({});
       expect(result.data.productList).toEqual([]);
     });
-}),
-  describe("Update Product", () => {
-    test("Happy Path", async () => {
-      listOfProducts = await TestHelper.executeGetCommand("product/get");
+});
+describe("Update Product", () => {
+  test("Happy Path", async () => {
+    listOfProducts = await TestHelper.executeGetCommand("product/get");
 
-      let updateProduct = {
-        id: listOfProducts.itemList[0].id,
-        name: "test1",
-        measureUnit: "test1MS",
+    let updateProduct = {
+      id: listOfProducts.itemList[0].id,
+      name: "test1",
+      measureUnit: "test1MS",
+    };
+    let updatedProduct = await TestHelper.executePostCommand("product/update", updateProduct);
+
+    expect(updatedProduct.status).toEqual(200);
+    expect(updatedProduct.data.uuAppErrorMap).toEqual({});
+    expect(updatedProduct.data.name).toBe("test1");
+    expect(updatedProduct.data.measureUnit).toBe("test1MS");
+  }),
+    test("Alternative scenario - update", async () => {
+      let dtoIn = {
+        id: "4444",
+        name: "test1 fail",
+        measureUnit: "g",
       };
-      let updatedProduct = await TestHelper.executePostCommand("product/update", updateProduct);
-
-      expect(updatedProduct.status).toEqual(200);
-      expect(updatedProduct.data.uuAppErrorMap).toEqual({});
-      expect(updatedProduct.data.name).toBe("test1");
-      expect(updatedProduct.data.measureUnit).toBe("test1MS");
-    }),
-      test("Alternative scenario - update", async () => {
-        let dtoIn = {
-          id: "4444",
-          name: "test1 fail",
-          measureUnit: "g",
-        };
-
-        try {
-          await TestHelper.executePostCommand("product/update", dtoIn);
-        } catch (error) {
-          expect(error.message).toEqual("Update of product failed");
-          expect(error.status).toEqual(400);
-        }
-      });
-  });
+      expect.assertions(2);
+      try {
+        await TestHelper.executePostCommand("product/update", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Update of product failed");
+        expect(error.status).toEqual(400);
+      }
+    });
+});

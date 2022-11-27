@@ -65,8 +65,8 @@ describe("Create LIST", () => {
 });
 
 describe("Update LIST", () => {
-  test("Happy Path - no products added", async () => {
-    let lists = await TestHelper.executeGetCommand("list/get");    
+  test("Happy Path", async () => {
+    let lists = await TestHelper.executeGetCommand("list/get");
 
     let dtoIn = {
       name: "Test1",
@@ -78,9 +78,8 @@ describe("Update LIST", () => {
 
     expect(result.status).toEqual(200);
     expect(result.data.uuAppErrorMap).toBeDefined();
-      expect(result.data.name).toBe("Test1");
-  })
-  ,
+    expect(result.data.name).toBe("Test1");
+  }),
     test("Alternative fail", async () => {
       let dtoIn = {
         name: "Test1",
@@ -97,4 +96,36 @@ describe("Update LIST", () => {
     });
 });
 
+describe("Delete LIST", () => {
+  test("Happy Path", async () => {
+    let lists = await TestHelper.executeGetCommand("list/get");
 
+    let dtoIn = {
+      id: lists.lists.itemList[0].id,
+    };
+
+    let result = await TestHelper.executePostCommand("list/delete", dtoIn);
+
+    expect(result.status).toEqual(200);
+    expect(result.data.uuAppErrorMap).toBeDefined();
+
+    lists = await TestHelper.executeGetCommand("list/get");
+
+    lists = lists.lists.itemList.filter((x) => x.id == dtoIn.id);
+    expect(lists).toEqual([]);
+  }),
+    test("Alternative fail", async () => {
+      let dtoIn = {
+        id: "4465asd",
+      };
+
+      expect.assertions(2);
+     
+      try {
+        await TestHelper.executePostCommand("list/delete", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Specified ID does not exists");
+        expect(error.status).toEqual(400);
+      }
+    });
+});
