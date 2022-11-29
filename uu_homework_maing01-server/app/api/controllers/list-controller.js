@@ -6,31 +6,31 @@ class ListController {
   updateProduct(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.updateProduct(awid, dtoIn);
+    return ListAbl.updateProduct(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   linkProduct(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.linkProduct(awid, dtoIn);
+    return ListAbl.linkProduct(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   delete(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.delete(awid, dtoIn);
+    return ListAbl.delete(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   update(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.update(awid, dtoIn);
+    return ListAbl.update(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   getProducts(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.getProducts(awid, dtoIn);
+    return ListAbl.getProducts(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   create(ucEnv) {
@@ -38,7 +38,7 @@ class ListController {
 
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ListAbl.create(awid, dtoIn);
+    return ListAbl.create(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   get(ucEnv) {

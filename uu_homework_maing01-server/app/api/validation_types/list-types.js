@@ -1,52 +1,63 @@
 /* eslint-disable */
 const listCreateDtoInType = shape({
-    name: uu5String(255).isRequired(),
-    ownerId: uuIdentity().isRequired(),
-    productList: array(
-      shape({
-        id: uu5String(50).isRequired(),
-        quantity: number().isRequired(),
-        purchased: boolean().isRequired()
-      })
-    )
-  });
+  name: uu5String(255).isRequired(),
+  identityList: array(
+      uuIdentity().isRequired(),
+  ),
+  productList: array(
+    shape({
+      id: id().isRequired(),
+      quantity: number().isRequired(),
+    })
+  ),
+});
 
-  const listUpdateDtoInType = shape({
-    name: uu5String(255).isRequired(),
-    ownerId: uuIdentity().isRequired(),
-    id: uu5String(255).isRequired(),
-  });
+const listUpdateDtoInType = shape({
+  name: uu5String(255).isRequired(),
+  id: id().isRequired(),
+  identityList: array(
+    shape({
+      uuId: uuIdentity().isRequired(),
+    })
+  ),
+  productList: array(
+    shape({
+      id: id().isRequired(),
+      quantity: number().isRequired(),
+      purchased: boolean().isRequired()
+    })
+  ),
+});
 
+const listGetDtoInType = shape({
+  id: id(),
+});
 
-  const listGetDtoInType = shape({
-    id: uu5String(255)
-  });
+const listDeleteDtoInType = shape({
+  id: id().isRequired(),
+});
 
-  const listDeleteDtoInType = shape({
-    id: uu5String(255).isRequired()
-  });
+const listGetProductDtoInType = shape({
+  id: id().isRequired(),
+});
 
-  const listGetProductDtoInType = shape({
-    id: uu5String(255).isRequired()
-  });
+const listLinkProductDtoInType = shape({
+  id: id().isRequired(),
+  productList: array(
+    shape({
+      id: id().isRequired(),
+      quantity: number().isRequired(),
+    })
+  ).isRequired(),
+});
 
-  const listLinkProductDtoInType = shape({
-    id: uu5String(255).isRequired(),
-    productList: array(
-      shape({
-        id: uu5String(50).isRequired(),
-        quantity: number().isRequired()
-      })
-    ).isRequired()
-  });
-
-  const listUpdateProductDtoInType = shape({
-    id: uu5String(255).isRequired(),
-    productList: array(
-      shape({
-        id: uu5String(50).isRequired(),
-        quantity: number().isRequired(),
-        purchased: boolean().isRequired()
-      })
-    ).isRequired()
-  });
+const listUpdateProductDtoInType = shape({
+  id: id().isRequired(),
+  productList: array(
+    shape({
+      id: id().isRequired(),
+      quantity: number().isRequired(),
+      purchased: boolean().isRequired(),
+    })
+  ).isRequired(),
+});

@@ -36,7 +36,7 @@ class ListAbl {
   }
 
   //unit tests done
-  async delete(awid, dtoIn) {
+  async delete(awid, dtoIn, session, authResult) {
     // HDS 1.1
     let validationResult = this.validator.validate("listDeleteDtoInType", dtoIn);
 
@@ -48,13 +48,15 @@ class ListAbl {
       Errors.Delete.InvalidDtoIn
     );
 
+      let list = await this.dao.getById(awid, dtoIn.id);
+      if (list.ownerId != authResult._identity) throw new Errors.Delete.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+
     // HDS 2
     let dtoOut = {
       awid: awid,
       uuAppErrorMap: uuAppErrorMap,
     };
     dtoIn.awid = awid;
-    let list = await this.dao.getById(awid, dtoIn.id);
     if (!list) throw new Errors.Delete.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
     try {
       await this.dao.remove(dtoIn);
@@ -68,7 +70,7 @@ class ListAbl {
     return dtoOut;
   }
   //unit tests done
-  async update(awid, dtoIn) {
+  async update(awid, dtoIn, session, authResult) {
     // HDS 1.1
     let validationResult = this.validator.validate("listUpdateDtoInType", dtoIn);
 
@@ -82,6 +84,10 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
+
+    let list = await this.dao.getById(awid, dtoIn.id);
+    if (!list) throw new Errors.Update.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+    if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
 
     dtoIn.awid = awid;
     // DAO
@@ -98,7 +104,7 @@ class ListAbl {
     return dtoOut;
   }
   //unit tests done
-  async create(awid, dtoIn) {
+  async create(awid, dtoIn, session, authResult) {
     // HDS 1.1
     let validationResult = this.validator.validate("listCreateDtoInType", dtoIn);
 
@@ -124,7 +130,24 @@ class ListAbl {
           dtoIn.productList[index].measureUnit = check.measureUnit;
         }
       }
+    } else {
+      dtoIn.productList = [];
     }
+    //check for duplicates nd remove them
+    if (dtoIn.identityList?.length) {
+      let uniqIdentities = [];
+      dtoIn.identityList.forEach((element) => {
+        if (!uniqIdentities.includes(element)) {
+          uniqIdentities.push(element);
+        }
+      });
+      dtoIn.identityList = uniqIdentities;
+    } else {
+      dtoIn.identityList = [];
+    }
+
+    //set owner
+    dtoIn.ownerId = session._identity._uuIdentity;
 
     // DAO
     try {
@@ -178,7 +201,7 @@ class ListAbl {
     return dtoOut;
   }
 
-  async updateProduct(awid, dtoIn) {
+  async updateProduct(awid, dtoIn, session, authResult) {
     // HDS 1.1
     let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);
 
@@ -196,6 +219,7 @@ class ListAbl {
     if (dtoIn.id) {
       let list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.UpdateProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+      if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
     }
 
     dtoIn.awid = awid;
@@ -248,7 +272,7 @@ class ListAbl {
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
-  async linkProduct(awid, dtoIn) {
+  async linkProduct(awid, dtoIn, session, authResult) {
     // HDS 1.1
     let validationResult = this.validator.validate("listLinkProductDtoInType", dtoIn);
 
@@ -263,6 +287,7 @@ class ListAbl {
     if (dtoIn.id) {
       let list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.LinkProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+      if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
     }
 
     // HDS 2

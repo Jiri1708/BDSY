@@ -6,7 +6,7 @@ class ProductController {
   update(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ProductAbl.update(awid, dtoIn);
+    return ProductAbl.update(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
   get(ucEnv) {
@@ -18,7 +18,7 @@ class ProductController {
   create(ucEnv) {
     const awid = ucEnv.getUri().getAwid();
     const dtoIn = ucEnv.parameters;
-    return ProductAbl.create(awid, dtoIn);
+    return ProductAbl.create(awid, dtoIn, ucEnv.getSession(), ucEnv.getAuthorizationResult());
   }
 
 }

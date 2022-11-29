@@ -74,6 +74,22 @@ const Update = {
       this.message = "Update of list failed";
     }
   },
+  ListDoesNotExist: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}listDoesNotExist`;
+      this.message = "Specified ID does not exist";
+      this.status = 404;
+    }
+  },
+  UserNotAuthorized: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}listDoesNotExist`;
+      this.message = "User is not authorized for this action";
+      this.status = 403;
+    }
+  },
 };
 
 const Delete = {
@@ -99,6 +115,14 @@ const Delete = {
       this.message = "Specified ID does not exists";
     }
   },
+  UserNotAuthorized: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}listDoesNotExist`;
+      this.message = "User is not authorized for this action";
+      this.status = 403;
+    }
+  },
 };
 //Unused methods
 const LinkProduct = {
@@ -120,30 +144,38 @@ const LinkProduct = {
   NoProductPresent: class extends HomeworkMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${UpdateProduct.UC_CODE}noProductPresent`;
+      this.code = `${LinkProduct.UC_CODE}noProductPresent`;
       this.message = "Update of products went wrong: Product not present";
     }
   },
   ProductAlreadyLinkedPresent: class extends HomeworkMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${UpdateProduct.UC_CODE}productAlreadyLinked`;
+      this.code = `${LinkProduct.UC_CODE}productAlreadyLinked`;
       this.message = "Update of products went wrong: Product already linked";
     }
   },
   ListDaoProductDoesNotExist: class extends HomeworkMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${UpdateProduct.UC_CODE}listDaoProductDoesNotExist`;
+      this.code = `${LinkProduct.UC_CODE}listDaoProductDoesNotExist`;
       this.message = "Update of products went wrong: Unknown productId";
     }
   },
   ListDoesNotExist: class extends HomeworkMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}listDoesNotExist`;
+      this.code = `${LinkProduct.UC_CODE}listDoesNotExist`;
       this.message = "Specified ID does not exist";
       this.status = 404;
+    }
+  },
+  UserNotAuthorized: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${LinkProduct.UC_CODE}listDoesNotExist`;
+      this.message = "User is not authorized for this action";
+      this.status = 403;
     }
   },
 };
@@ -188,9 +220,17 @@ const UpdateProduct = {
   ListDoesNotExist: class extends HomeworkMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}listDoesNotExist`;
+      this.code = `${UpdateProduct.UC_CODE}listDoesNotExist`;
       this.message = "Specified ID does not exist";
       this.status = 404;
+    }
+  },
+  UserNotAuthorized: class extends HomeworkMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${UpdateProduct.UC_CODE}listDoesNotExist`;
+      this.message = "User is not authorized for this action";
+      this.status = 403;
     }
   },
 };
