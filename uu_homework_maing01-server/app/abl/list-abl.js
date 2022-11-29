@@ -170,14 +170,14 @@ class ListAbl {
     // get all lists
     else {
       list = await this.dao.get(awid);
-      console.log(list)
+      console.log(list);
       console.log(list.itemList.length);
       if (list.itemList?.length == 0) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
     dtoOut.lists = list;
     return dtoOut;
   }
-  
+
   async updateProduct(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);
@@ -192,6 +192,11 @@ class ListAbl {
 
     // HDS 2
     let dtoOut = { ...dtoIn };
+    //check if list exists
+    if (dtoIn.id) {
+      let list = await this.dao.getById(awid, dtoIn.id);
+      if (!list) throw new Errors.UpdateProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+    }
 
     dtoIn.awid = awid;
     // DAO
@@ -255,6 +260,11 @@ class ListAbl {
       Errors.LinkProduct.InvalidDtoIn
     );
 
+    if (dtoIn.id) {
+      let list = await this.dao.getById(awid, dtoIn.id);
+      if (!list) throw new Errors.LinkProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
+    }
+
     // HDS 2
     let dtoOut = { ...dtoIn };
 
@@ -298,7 +308,7 @@ class ListAbl {
 
     return dtoOut;
   }
-  
+
   //#region Dummy methods
   async getProducts(awid, dtoIn) {
     // HDS 1.1
