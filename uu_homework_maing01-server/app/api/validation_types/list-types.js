@@ -1,9 +1,7 @@
 /* eslint-disable */
 const listCreateDtoInType = shape({
   name: uu5String(255).isRequired(),
-  identityList: array(
-      uuIdentity().isRequired(),
-  ),
+  identityList: array(uuIdentity().isRequired()),
   productList: array(
     shape({
       id: id().isRequired(),
@@ -15,16 +13,12 @@ const listCreateDtoInType = shape({
 const listUpdateDtoInType = shape({
   name: uu5String(255).isRequired(),
   id: id().isRequired(),
-  identityList: array(
-    shape({
-      uuId: uuIdentity().isRequired(),
-    })
-  ),
+  identityList: array(uuIdentity().isRequired()),
   productList: array(
     shape({
       id: id().isRequired(),
       quantity: number().isRequired(),
-      purchased: boolean().isRequired()
+      purchased: boolean().isRequired(),
     })
   ),
 });

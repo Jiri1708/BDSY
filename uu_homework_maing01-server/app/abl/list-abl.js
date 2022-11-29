@@ -37,10 +37,8 @@ class ListAbl {
 
   //unit tests done
   async delete(awid, dtoIn, session, authResult) {
-    
     let validationResult = this.validator.validate("listDeleteDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -49,7 +47,12 @@ class ListAbl {
     );
 
     let list = await this.dao.getById(awid, dtoIn.id);
-    if (list.ownerId != authResult._identity) throw new Errors.Delete.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+
+    if (list.ownerId != session._identity._uuIdentity) {
+      if (!list.identityList.includes(session._identity._uuIdentity)) {
+        throw new Errors.Delete.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+      }
+    }
 
     let dtoOut = {
       awid: awid,
@@ -70,10 +73,8 @@ class ListAbl {
   }
   //unit tests done
   async update(awid, dtoIn, session, authResult) {
-    
     let validationResult = this.validator.validate("listUpdateDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -82,10 +83,13 @@ class ListAbl {
     );
 
     let dtoOut = { ...dtoIn };
-
     let list = await this.dao.getById(awid, dtoIn.id);
     if (!list) throw new Errors.Update.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
-    if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+    if (list.ownerId != session._identity._uuIdentity) {
+      if (!list.identityList.includes(session._identity._uuIdentity)) {
+        throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+      }
+    }
 
     dtoIn.awid = awid;
     // DAO
@@ -103,10 +107,8 @@ class ListAbl {
   }
   //unit tests done
   async create(awid, dtoIn, session, authResult) {
-    
     let validationResult = this.validator.validate("listCreateDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -163,10 +165,8 @@ class ListAbl {
   }
   //unit tests done
   async get(awid, dtoIn) {
-    
     let validationResult = this.validator.validate("listGetDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -199,10 +199,8 @@ class ListAbl {
   }
 
   async updateProduct(awid, dtoIn, session, authResult) {
-    
     let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -215,7 +213,11 @@ class ListAbl {
     if (dtoIn.id) {
       let list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.UpdateProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
-      if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+      if (list.ownerId != session._identity._uuIdentity) {
+        if (!list.identityList.includes(session._identity._uuIdentity)) {
+          throw new Errors.UpdateProduct.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+        }
+      }
     }
 
     dtoIn.awid = awid;
@@ -269,10 +271,8 @@ class ListAbl {
     return dtoOut;
   }
   async linkProduct(awid, dtoIn, session, authResult) {
-    
     let validationResult = this.validator.validate("listLinkProductDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -283,7 +283,11 @@ class ListAbl {
     if (dtoIn.id) {
       let list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.LinkProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
-      if (list.ownerId != authResult._identity) throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+       if (list.ownerId != session._identity._uuIdentity) {
+         if (!list.identityList.includes(session._identity._uuIdentity)) {
+           throw new Errors.LinkProduct.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+         }
+       }
     }
 
     let dtoOut = { ...dtoIn };
@@ -331,10 +335,8 @@ class ListAbl {
 
   //#region Dummy methods
   async getProducts(awid, dtoIn) {
-    
     let validationResult = this.validator.validate("listGetProductDtoInType", dtoIn);
 
-    
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
