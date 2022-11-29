@@ -18,6 +18,7 @@ const Get = {
       super(...arguments);
       this.code = `${Get.UC_CODE}listDoesNotExist`;
       this.message = "Specified ID does not exist";
+      this.status = 404;
     }
   },
   NoListExists: class extends HomeworkMainUseCaseError {
@@ -25,6 +26,7 @@ const Get = {
       super(...arguments);
       this.code = `${Get.UC_CODE}noListExists`;
       this.message = "Application contains no list";
+       this.status = 404;
     }
   }
 };

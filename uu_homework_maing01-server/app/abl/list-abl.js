@@ -140,6 +140,7 @@ class ListAbl {
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
+  //unit tests done
   async get(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listGetDtoInType", dtoIn);
@@ -169,11 +170,14 @@ class ListAbl {
     // get all lists
     else {
       list = await this.dao.get(awid);
-      if (!list) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
+      console.log(list)
+      console.log(list.itemList.length);
+      if (list.itemList?.length == 0) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
     dtoOut.lists = list;
     return dtoOut;
   }
+  
   async updateProduct(awid, dtoIn) {
     // HDS 1.1
     let validationResult = this.validator.validate("listUpdateProductDtoInType", dtoIn);

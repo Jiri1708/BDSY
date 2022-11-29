@@ -145,27 +145,155 @@ describe("Delete LIST", () => {
       };
 
       expect.assertions(2);
-     
+
       try {
         await TestHelper.executePostCommand("list/delete", dtoIn);
       } catch (error) {
         expect(error.message).toEqual("Specified ID does not exists");
         expect(error.status).toEqual(400);
       }
-    })
-    ,
+    }),
     test("Alternative fail - dtoIn", async () => {
-      let dtoIn = {
-        
-      };
+      let dtoIn = {};
 
       expect.assertions(2);
-     
+
       try {
         await TestHelper.executePostCommand("list/delete", dtoIn);
       } catch (error) {
         expect(error.message).toEqual("DtoIn is not valid.");
         expect(error.status).toEqual(400);
+      }
+    });
+});
+
+describe("Update List's product", () => {
+  test("Happy Path", async () => {
+    let products = await TestHelper.executeGetCommand("product/get");
+    let dtoIn = {
+      name: "Alza 27.12",
+      ownerId: "3627-8321-1",
+      productList: [],
+    };
+    for (let index = 0; index < products.data.itemList.length; index++) {
+      const element = products.data.itemList[index];
+      dtoIn.productList.push({
+        id: element.id,
+        quantity: Math.random() * 100,
+        purchased: false,
+      });
+    }
+    //vytvoreni listu s produkty
+    let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
+
+    let dtoIn2 = {
+      id: listCreate.data.id,
+      productList: [],
+    };
+
+    for (let index = 0; index < listCreate.data.productList.length; index++) {
+      const element = listCreate.data.productList[index];
+      dtoIn2.productList.push({
+        id: element.id,
+        quantity: element.quantity,
+        purchased: true,
+      });
+    }
+
+    let result = await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
+
+    expect(result.status).toEqual(200);
+    expect(result.data.uuAppErrorMap).toBeDefined();
+
+    //check update of one product
+    let dtoIn3 = { ...dtoIn2 };
+    dtoIn3.productList = dtoIn3.productList.slice(dtoIn3.length - 1);
+    dtoIn3.productList[0].purchased = false
+    let updateOfOneProduct = await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
+
+    expect(updateOfOneProduct.data.productList.length).toEqual(dtoIn2.productList.length);
+
+    // let result = await TestHelper.executePostCommand("list/updateProduct", dtoIn);
+
+    // expect(result.status).toEqual(200);
+    // expect(result.data.uuAppErrorMap).toBeDefined();
+    // expect(result.data.name).toBe("Test1");
+  });
+  // ,
+  //   test("Alternative fail", async () => {
+  //     let dtoIn = {
+  //       name: "Test1",
+  //       ownerId: "3627-8321-1",
+  //       id: "445asd",
+  //     };
+
+  //     try {
+  //       await TestHelper.executePostCommand("list/update", dtoIn);
+  //     } catch (error) {
+  //       expect(error.message).toEqual("Update of list failed");
+  //       expect(error.status).toEqual(400);
+  //     }
+  //   }),
+  //   test("Alternative fail - dtoIn", async () => {
+  //     let dtoIn = {};
+
+  //     expect.assertions(2);
+
+  //     try {
+  //       await TestHelper.executePostCommand("list/update", dtoIn);
+  //     } catch (error) {
+  //       expect(error.message).toEqual("DtoIn is not valid.");
+  //       expect(error.status).toEqual(400);
+  //     }
+  //   });
+});
+
+describe("Get LIST", () => {
+  test("Happy Path - all", async () => {
+    let result = await TestHelper.executeGetCommand("list/get");
+
+    expect(result.status).toEqual(200);
+    expect(result.data.uuAppErrorMap).toBeDefined();
+    expect(result.data.lists).not.toBe({});
+  }),
+    test("Happy path - Id", async () => {
+      let lists = await TestHelper.executeGetCommand("list/get");
+      let dtoIn = {
+        id: lists.lists.itemList[0].id,
+      };
+
+      let result = await TestHelper.executeGetCommand("list/get", dtoIn);
+
+      expect(result.status).toEqual(200);
+      expect(result.data.uuAppErrorMap).toBeDefined();
+      expect(result.data.lists).not.toBe({});
+    }),
+    test("Alternative fail - invalidId", async () => {
+      let dtoIn = {
+        id: "454654654",
+      };
+      expect.assertions(2);
+      try {
+        await TestHelper.executeGetCommand("list/get", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Specified ID does not exist");
+        expect(error.status).toEqual(404);
+      }
+    }),
+    test("Alternative fail - noList", async () => {
+      let lists = await TestHelper.executeGetCommand("list/get");
+
+      for (let index = 0; index < lists.lists.itemList.length; index++) {
+        const element = lists.lists.itemList[index];
+        await TestHelper.executePostCommand("list/delete", { id: element.id });
+      }
+
+      //expect.assertions(2);
+      try {
+        await TestHelper.executeGetCommand("list/get");
+      } catch (error) {
+        expect(error.message).toEqual("Application contains no list");
+        expect(error.status).toEqual(404);
       }
     });
 });
