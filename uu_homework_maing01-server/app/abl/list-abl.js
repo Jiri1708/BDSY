@@ -90,9 +90,42 @@ class ListAbl {
         throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
       }
     }
+    //#region Identity handling
+    //Lepsi reseni by bylo po vzoru produktu - link / unlink v separatnim cmd.
+
+    //incoming payload duplicate clean
+    if (dtoIn.identityList?.length) {
+      let uniqIdentities = [];
+      dtoIn.identityList.forEach((element) => {
+        if (!uniqIdentities.includes(element)) {
+          uniqIdentities.push(element);
+        }
+      });
+console.log("new identityList");
+console.log(uniqIdentities);
+console.log(list.identityList);
+console.log("existing identityList");
+
+      dtoIn.identityList = uniqIdentities.concat(list.identityList);
+console.log("combined identityList");
+console.log(dtoIn.identityList);
+
+
+      uniqIdentities = [];
+      dtoIn.identityList.forEach((element) => {
+        if (!uniqIdentities.includes(element)) {
+          uniqIdentities.push(element);
+        }
+      });
+      //merge with existing payload
+      dtoIn.identityList = uniqIdentities;
+    }
+    //#endregion Identity handling
 
     dtoIn.awid = awid;
-    // DAO
+
+    //#region DAO
+
     try {
       dtoOut = await this.dao.update(dtoIn);
     } catch (e) {
@@ -101,6 +134,9 @@ class ListAbl {
       }
       throw e;
     }
+
+    //#endregion DAO
+
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
