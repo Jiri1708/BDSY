@@ -94,32 +94,19 @@ class ListAbl {
     //Lepsi reseni by bylo po vzoru produktu - link / unlink v separatnim cmd.
 
     //incoming payload duplicate clean
-    if (dtoIn.identityList?.length) {
+    if (dtoIn.identityList?.length > 0) {
       let uniqIdentities = [];
-      dtoIn.identityList.forEach((element) => {
+      dtoIn.identityList.concat(list.identityList).forEach((element) => {
         if (!uniqIdentities.includes(element)) {
           uniqIdentities.push(element);
         }
-      });
-console.log("new identityList");
-console.log(uniqIdentities);
-console.log(list.identityList);
-console.log("existing identityList");
-
-      dtoIn.identityList = uniqIdentities.concat(list.identityList);
-console.log("combined identityList");
-console.log(dtoIn.identityList);
-
-
-      uniqIdentities = [];
-      dtoIn.identityList.forEach((element) => {
-        if (!uniqIdentities.includes(element)) {
-          uniqIdentities.push(element);
-        }
-      });
+      });     
+      
       //merge with existing payload
       dtoIn.identityList = uniqIdentities;
     }
+    //in case of no identity provided via payload - 
+    else dtoIn.identityList = list.identityList
     //#endregion Identity handling
 
     dtoIn.awid = awid;
