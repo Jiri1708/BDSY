@@ -100,13 +100,13 @@ class ListAbl {
         if (!uniqIdentities.includes(element)) {
           uniqIdentities.push(element);
         }
-      });     
-      
+      });
+
       //merge with existing payload
       dtoIn.identityList = uniqIdentities;
     }
-    //in case of no identity provided via payload - 
-    else dtoIn.identityList = list.identityList
+    //in case of no identity provided via payload -
+    else dtoIn.identityList = list.identityList;
     //#endregion Identity handling
 
     dtoIn.awid = awid;
@@ -114,7 +114,12 @@ class ListAbl {
     //#region DAO
 
     try {
-      dtoOut = await this.dao.update(dtoIn);
+      dtoOut = await this.dao.update({
+        id: dtoIn.id,
+        name: dtoIn.name,
+        identityList: dtoIn.identityList,
+        awid: dtoIn.awid,
+      });
     } catch (e) {
       if (e instanceof ObjectStoreError) {
         throw new Errors.Update.ListDaoUpdateFailed({ uuAppErrorMap }, e);
@@ -170,11 +175,18 @@ class ListAbl {
     }
 
     //set owner
-    dtoIn.ownerId = session._identity._uuIdentity;
+    //dtoIn.ownerId = session._identity._uuIdentity;
 
     // DAO
+
     try {
-      dtoOut = await this.dao.create(dtoIn);
+      dtoOut = await this.dao.create({
+        name: dtoIn.name,
+        identityList: dtoIn.identityList,
+        productList: dtoIn.productList,
+        ownerId: session._identity._uuIdentity,
+        awid: dtoIn.awid,
+      });
     } catch (e) {
       if (e instanceof ObjectStoreError) {
         throw new Errors.Create.ListDaoCreateFailed({ uuAppErrorMap }, e);
@@ -263,17 +275,17 @@ class ListAbl {
           checkedList.productList[obj].quantity = element.quantity;
           checkedList.productList[obj].purchased = element.purchased;
         }
-        
 
         // remove unused stuff
-        let list = {
-          awid: dtoIn.awid,
-          id: dtoIn.id,
-          productList: checkedList.productList
-        }
 
         try {
-          dtoOut = await this.dao.update(list);
+          dtoOut = await this.dao.update(
+            {
+          awid: dtoIn.awid,
+          id: dtoIn.id,
+          productList: checkedList.productList,
+        }
+        );
         } catch (e) {
           if (e instanceof ObjectStoreError) {
             throw new Errors.UpdateProduct.ListDaoUpdateProductFailed(
@@ -295,7 +307,7 @@ class ListAbl {
       }
       throw e;
     }
-   // dtoOut.awid = awid;
+    // dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
@@ -312,11 +324,11 @@ class ListAbl {
     if (dtoIn.id) {
       let list = await this.dao.getById(awid, dtoIn.id);
       if (!list) throw new Errors.LinkProduct.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
-       if (list.ownerId != session._identity._uuIdentity) {
-         if (!list.identityList.includes(session._identity._uuIdentity)) {
-           throw new Errors.LinkProduct.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
-         }
-       }
+      if (list.ownerId != session._identity._uuIdentity) {
+        if (!list.identityList.includes(session._identity._uuIdentity)) {
+          throw new Errors.LinkProduct.UserNotAuthorized({ uuAppErrorMap }, dtoIn);
+        }
+      }
     }
 
     let dtoOut = { ...dtoIn };
@@ -346,13 +358,14 @@ class ListAbl {
         }
       }
 
-      let list = {
-        productList: dtoIn.productList.concat(checkedList.productList),
-        id: dtoIn.id,
-        awid: dtoIn.awid
-      }
       try {
-        dtoOut = await this.dao.update(list);
+        dtoOut = await this.dao.update(
+          {
+          productList: dtoIn.productList.concat(checkedList.productList),
+          id: dtoIn.id,
+          awid: dtoIn.awid,
+        }
+        );
         dtoOut.uuAppErrorMap = uuAppErrorMap;
       } catch (e) {
         if (e instanceof ObjectStoreError) {
@@ -377,7 +390,7 @@ class ListAbl {
     );
 
     let dtoOut = { ...dtoIn };
-   // dtoOut.awid = awid;
+    // dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }

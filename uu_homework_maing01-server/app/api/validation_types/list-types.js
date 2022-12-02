@@ -14,13 +14,6 @@ const listUpdateDtoInType = shape({
   name: uu5String(255).isRequired(),
   id: id().isRequired(),
   identityList: array(uuIdentity().isRequired()),
-  productList: array(
-    shape({
-      id: id().isRequired(),
-      quantity: number().isRequired(),
-      purchased: boolean().isRequired(),
-    })
-  ),
 });
 
 const listGetDtoInType = shape({
