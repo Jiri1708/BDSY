@@ -47,7 +47,7 @@ class ProductAbl {
       }
       throw e;
     }
-    dtoOut.awid = awid;
+    //dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
 
     return dtoOut;
@@ -85,7 +85,7 @@ class ProductAbl {
         if (test) dtoOut.productList.push(test);
       }
     }
-    dtoOut.awid = awid;
+   // dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
 
    
@@ -118,7 +118,7 @@ class ProductAbl {
       }
       throw e;
     }
-    dtoOut.awid = awid;
+    //dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }

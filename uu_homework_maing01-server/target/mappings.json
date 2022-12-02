@@ -518,21 +518,6 @@
         "realization": "api/controllers/ProductController.update",
         "httpMethod": "POST",
         "type": "CMD"
-      },
-      "identity/assignRole": {
-        "realization": "api/controllers/IdentityController.assignRole",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "identity/removeRole": {
-        "realization": "api/controllers/IdentityController.removeRole",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "identity/getRoles": {
-        "realization": "api/controllers/IdentityController.getRoles",
-        "httpMethod": "GET",
-        "type": "CMD"
       }
     }
   },

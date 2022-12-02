@@ -67,7 +67,7 @@ describe("Get Product", () => {
     test("Alternative scenario - id", async () => {
       let idList = [
         {
-          id: "test",
+          id: "11177f493777d44069efe494",
         },
       ];
 
@@ -95,7 +95,7 @@ describe("Update Product", () => {
   }),
     test("Alternative scenario invalid ID - update", async () => {
       let dtoIn = {
-        id: "4444",
+        id: "11177f493777d44069efe494",
         name: "test1 fail",
         measureUnit: "g",
       };

@@ -64,18 +64,6 @@
       "product/update": {
         "sysStateList": ["active"],
         "profileList": ["Owner","Contributor"]
-      },
-      "identity/assignRole": {
-        "sysStateList": ["active"],
-        "profileList": ["Owner"]
-      },
-      "identity/removeRole": {
-        "sysStateList": ["active"],
-        "profileList": ["Owner"]
-      },
-      "identity/getRoles": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
       }
     }
   }

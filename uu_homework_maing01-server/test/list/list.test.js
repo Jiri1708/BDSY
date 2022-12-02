@@ -18,7 +18,6 @@ describe("Create LIST", () => {
   test("Happy Path - no products added", async () => {
     let dtoIn = {
       name: "Alza 27.12",
-      ownerId: "3627-8321-1",
       productList: [],
     };
 
@@ -31,7 +30,6 @@ describe("Create LIST", () => {
       let products = await TestHelper.executeGetCommand("product/get");
       let dtoIn = {
         name: "Alza 27.12",
-        ownerId: "3627-8321-1",
         productList: [],
       };
       for (let index = 0; index < products.length; index++) {
@@ -51,8 +49,7 @@ describe("Create LIST", () => {
     test("Alternative productDoesNotExists", async () => {
       let dtoIn = {
         name: "Alza 27.12",
-        ownerId: "3627-8321-1",
-        productList: [{ id: "46546", quantity: 444, purchased: false }],
+        productList: [{ id: "63877f493777d44069efe494", quantity: 444, purchased: false }],
       };
 
       try {
@@ -64,7 +61,6 @@ describe("Create LIST", () => {
     }),
     test("Alternative invalidDtoIn", async () => {
       let dtoIn = {
-        ownerId: "3627-",
         productList: [{ id: "46546", quantity: 444, purchased: false }],
       };
 
@@ -83,8 +79,8 @@ describe("Update LIST", () => {
 
     let dtoIn = {
       name: "Test1",
-      ownerId: "3627-8321-1",
       id: lists.lists.itemList[0].id,
+      identityList: [],
     };
 
     let result = await TestHelper.executePostCommand("list/update", dtoIn);
@@ -93,20 +89,6 @@ describe("Update LIST", () => {
     expect(result.data.uuAppErrorMap).toBeDefined();
     expect(result.data.name).toBe("Test1");
   }),
-    test("Alternative fail", async () => {
-      let dtoIn = {
-        name: "Test1",
-        ownerId: "3627-8321-1",
-        id: "445asd",
-      };
-
-      try {
-        await TestHelper.executePostCommand("list/update", dtoIn);
-      } catch (error) {
-        expect(error.message).toEqual("Update of list failed");
-        expect(error.status).toEqual(400);
-      }
-    }),
     test("Alternative fail - dtoIn", async () => {
       let dtoIn = {};
 
@@ -141,7 +123,7 @@ describe("Delete LIST", () => {
   }),
     test("Alternative fail - invalid Id", async () => {
       let dtoIn = {
-        id: "4465asd",
+        id: "63877f493777d44069efe494",
       };
 
       expect.assertions(2);
@@ -172,7 +154,6 @@ describe("Update List's product", () => {
     let products = await TestHelper.executeGetCommand("product/get");
     let dtoIn = {
       name: "Alza 27.12",
-      ownerId: "3627-8321-1",
       productList: [],
     };
     for (let index = 0; index < products.data.itemList.length; index++) {
@@ -208,7 +189,7 @@ describe("Update List's product", () => {
     //check update of one product
     let dtoIn3 = { ...dtoIn2 };
     dtoIn3.productList = dtoIn3.productList.slice(dtoIn3.length - 1);
-    dtoIn3.productList[0].purchased = false
+    dtoIn3.productList[0].purchased = false;
     let updateOfOneProduct = await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
 
     expect(updateOfOneProduct.data.productList.length).toEqual(dtoIn2.productList.length);
@@ -270,7 +251,7 @@ describe("Get LIST", () => {
     }),
     test("Alternative fail - invalidId", async () => {
       let dtoIn = {
-        id: "454654654",
+        id: "63877f493777d44069efe494",
       };
       expect.assertions(2);
       try {

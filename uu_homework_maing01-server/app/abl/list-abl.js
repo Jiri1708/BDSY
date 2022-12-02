@@ -47,6 +47,7 @@ class ListAbl {
     );
 
     let list = await this.dao.getById(awid, dtoIn.id);
+    if (!list) throw new Errors.Delete.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
 
     if (list.ownerId != session._identity._uuIdentity) {
       if (!list.identityList.includes(session._identity._uuIdentity)) {
@@ -59,7 +60,6 @@ class ListAbl {
       uuAppErrorMap: uuAppErrorMap,
     };
     dtoIn.awid = awid;
-    if (!list) throw new Errors.Delete.ListDoesNotExist({ uuAppErrorMap }, dtoIn);
     try {
       await this.dao.remove(dtoIn);
     } catch (e) {
@@ -124,7 +124,7 @@ class ListAbl {
 
     //#endregion DAO
 
-    dtoOut.awid = awid;
+    //dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
@@ -182,7 +182,7 @@ class ListAbl {
       throw e;
     }
 
-    dtoOut.awid = awid;
+    //dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
@@ -213,8 +213,6 @@ class ListAbl {
     // get all lists
     else {
       list = await this.dao.get(awid);
-      console.log(list);
-      console.log(list.itemList.length);
       if (list.itemList?.length == 0) throw new Errors.Get.NoListExists({ uuAppErrorMap }, dtoIn);
     }
     dtoOut.lists = list;
@@ -265,9 +263,17 @@ class ListAbl {
           checkedList.productList[obj].quantity = element.quantity;
           checkedList.productList[obj].purchased = element.purchased;
         }
-        dtoIn.productList = checkedList.productList;
+        
+
+        // remove unused stuff
+        let list = {
+          awid: dtoIn.awid,
+          id: dtoIn.id,
+          productList: checkedList.productList
+        }
+
         try {
-          dtoOut = await this.dao.update(dtoIn);
+          dtoOut = await this.dao.update(list);
         } catch (e) {
           if (e instanceof ObjectStoreError) {
             throw new Errors.UpdateProduct.ListDaoUpdateProductFailed(
@@ -289,7 +295,7 @@ class ListAbl {
       }
       throw e;
     }
-    dtoOut.awid = awid;
+   // dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
@@ -340,10 +346,13 @@ class ListAbl {
         }
       }
 
+      let list = {
+        productList: dtoIn.productList.concat(checkedList.productList),
+        id: dtoIn.id,
+        awid: dtoIn.awid
+      }
       try {
-        dtoIn.productList = dtoIn.productList.concat(checkedList.productList);
-        dtoOut = await this.dao.update(dtoIn);
-        dtoOut.awid = awid;
+        dtoOut = await this.dao.update(list);
         dtoOut.uuAppErrorMap = uuAppErrorMap;
       } catch (e) {
         if (e instanceof ObjectStoreError) {
@@ -368,7 +377,7 @@ class ListAbl {
     );
 
     let dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
+   // dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
     return dtoOut;
   }
