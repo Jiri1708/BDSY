@@ -4,6 +4,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
+import { ColorSchemaChanger } from "../bricks/homework_part4/homework_part4_switch.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -51,6 +52,9 @@ const RouteBar = createVisualComponent({
         children: <Lsi import={importLsi} path={["Menu", "homework_part3"]} />,
         onClick: () => setRoute("homework_part3"),
       },
+      {
+        children: <ColorSchemaChanger/>
+      }
     ];
     //@@viewOff:private
 

@@ -9,6 +9,7 @@ import Home from "../routes/home.js";
 import Homework_part1 from "../routes/homework_part1.js";
 import Homework_part2 from "../routes/homework_part2.js";
 import Homework_part3 from "../routes/homework_part3.js";
+import { ColorSchemaProvider } from "../bricks/context/ColorSchemaContext.js";
 
 //@@viewOff:imports
 
@@ -63,9 +64,11 @@ const Spa = createVisualComponent({
     //@@viewOn:render
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Uu5Elements.ModalBus>
-          <Plus4U5App.Spa routeMap={ROUTE_MAP} />
-        </Uu5Elements.ModalBus>
+        <ColorSchemaProvider>
+          <Uu5Elements.ModalBus>
+            <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+          </Uu5Elements.ModalBus>
+        </ColorSchemaProvider>
       </Plus4U5.SpaProvider>
     );
     //@@viewOff:render
