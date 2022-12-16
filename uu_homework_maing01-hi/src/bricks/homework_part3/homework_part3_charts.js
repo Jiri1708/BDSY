@@ -54,7 +54,7 @@ const Charts = createVisualComponent({
           <UU5.SimpleChart.LineChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
         <UU5.Bricks.Row className={CSS.main()}>
-          <UU5.SimpleChart.RadialBarChart data={props.dataDtoIn} series={props.seriesDtoIn} />
+          <UU5.SimpleChart.RadialBarChart colorSchema={colorSchema} data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>
         <UU5.Bricks.Row className={CSS.main()}>
           <UU5.SimpleChart.AreaChart data={props.dataDtoIn} series={props.seriesDtoIn} />

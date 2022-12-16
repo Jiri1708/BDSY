@@ -10,6 +10,7 @@ import SquareList from "../bricks/homework_part1/homework_part1_squares-list";
 import SquareProvider from "../bricks/homework_part1/homework_part1_squares-provider";
 import Table from "../bricks/homework_part1/homework_part1_table";
 import TableDataProvider from "../bricks/homework_part1/homework_part1_tableData-provider";
+import { ColorSchemaChanger } from "../bricks/homework_part4/homework_part4_switch";
 //@@viewOff:imports
 
 const Homework_part1 = createVisualComponent({
@@ -22,6 +23,7 @@ const Homework_part1 = createVisualComponent({
     return (
       <div>
         <RouteBar />
+        <ColorSchemaChanger></ColorSchemaChanger>
         <UU5.Bricks.Row>
           <SquareProvider>
             {({ squares }) => {

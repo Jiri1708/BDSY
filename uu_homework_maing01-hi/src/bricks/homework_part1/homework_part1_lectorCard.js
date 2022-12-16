@@ -1,10 +1,11 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
-import { createVisualComponent } from "uu5g04-hooks";
+import { createVisualComponent, useContext } from "uu5g04-hooks";
 import Config from "../config/config";
 import image from "../../assets/user.png";
 import CSS from "./homework_part1_lectorCard.css";
+import { ColorSchemaContext } from "../context/ColorSchemaContext";
 //@@viewOff:imports
 
 const LectorCard = createVisualComponent({
@@ -51,11 +52,11 @@ const LectorCard = createVisualComponent({
         </>
       );
     }
-
+const { colorSchema } = useContext(ColorSchemaContext);
     return (
       <>
         <h2 className={CSS.heading()}>Dnešní lektor</h2>
-        <UU5.Bricks.Card className={CSS.main()}>
+        <UU5.Bricks.Card className={CSS.main()} colorSchema={colorSchema}>
           <UU5.Bricks.Row>
             <UU5.Bricks.Column colWidth="xs-4 s-4">
               <UU5.Bricks.Image src={image} alt="logo" name="Image description" />
