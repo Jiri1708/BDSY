@@ -1,9 +1,11 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, PropTypes } from "uu5g05";
+import { createVisualComponent, Utils, PropTypes, useContext } from "uu5g05";
 import Config from "../config/config.js";
 import "uu5g04-bricks";
 import "uu5chartg01";
 import CSS from "./homework_part1_charts.css";
+import { DarkModeContext } from "../context/DarkModeContext.js";
+import { SchemaSwitch} from "../homework_part4/homework_part4_switch";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -40,9 +42,12 @@ const Charts = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-
+const {darkMode} = useContext(DarkModeContext);
     return (
       <>
+        <SchemaSwitch/>
+          DarkMODE {darkMode ? "test" : "test2"} 
+          {"testik"}
         <UU5.Bricks.Row className={CSS.main()}>
           <UU5.SimpleChart.BarChart data={props.dataDtoIn} series={props.seriesDtoIn} />
         </UU5.Bricks.Row>

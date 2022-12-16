@@ -6,6 +6,7 @@ import UU5 from "uu5g04";
 import "uu5g04-bricks";
 import "uu5g04-forms";
 import Chart from "../bricks/homework_part3/homework_part3_charts";
+import { DarkModeProvider } from "../bricks/context/DarkModeContext";
 //@@viewOff:imports
 //@@viewOn:constants
 
@@ -85,7 +86,8 @@ const Homework_part3 = createVisualComponent({
     }
 
     return (
-      <div>
+      <DarkModeProvider>
+
         <RouteBar />
         <h1 className={h1()}>Statistiky obyvatelstva v ČR za {yearTextFormatter(inputYear)}</h1>
         <UU5.Bricks.Row>
@@ -103,7 +105,7 @@ const Homework_part3 = createVisualComponent({
           </UU5.Bricks.Column>
         </UU5.Bricks.Row>
         <Chart dataDtoIn={chartData} seriesDtoIn={chartSeries["series"]} />
-      </div>
+      </DarkModeProvider>
     );
 
     //@@viewOff:render
