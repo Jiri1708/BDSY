@@ -1,8 +1,9 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createVisualComponent } from "uu5g04-hooks";
+import { createVisualComponent, useContext } from "uu5g04-hooks";
 import Config from "../config/config";
 import CSS from "./homework_part1_table.css";
+import { ColorSchemaContext } from "../context/ColorSchemaContext";
 
 //@@viewOff:imports
 
@@ -32,11 +33,11 @@ const Table = createVisualComponent({
     if (data.length === 0) {
       return <UU5.Common.Error content="No squares!" />;
     }
-
+const { colorSchema } = useContext(ColorSchemaContext);
     return (
       <>
         {renderHeading()}
-        <UU5.Bricks.Table bordered allowTags={["TableRow"]}>
+        <UU5.Bricks.Table bordered allowTags={["TableRow"]} colorSchema={colorSchema}>
           <UU5.Bricks.Table.THead>
             <UU5.Bricks.Table.Tr>
               <UU5.Bricks.Table.Th content="Jméno" />

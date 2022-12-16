@@ -1,8 +1,9 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createComponent, useState } from "uu5g04-hooks";
+import { createComponent, useState, useContext } from "uu5g04-hooks";
 import Config from "../config/config";
 import ShopTileCreateForm from "./homework_part2_shopTile-createForm";
+import { ColorSchemaContext } from "../context/ColorSchemaContext";
 
 //@@viewOff:imports
 
@@ -49,8 +50,9 @@ const ShopTileCreate = createComponent({
     //@@viewOff:private
 
     //@@viewOn:render
+    const { colorSchema } = useContext(ColorSchemaContext);
     function renderButton() {
-      return <UU5.Bricks.Button onClick={handleAddClick} colorSchema="primary" content="Add shop tile" />;
+      return <UU5.Bricks.Button onClick={handleAddClick} colorSchema={colorSchema} content="Add shop tile" />;
     }
 
     function renderForm() {

@@ -1,11 +1,14 @@
 //@@viewOn:imports
-import { createVisualComponent, useState } from "uu5g05";
+import { createVisualComponent, useState, useContext } from "uu5g05";
 import Config from "./config/config";
 import RouteBar from "../core/route-bar";
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
 import "uu5g04-forms";
 import Chart from "../bricks/homework_part3/homework_part3_charts";
+import { ColorSchemaProvider } from "../bricks/context/ColorSchemaContext";
+import { ColorSchemaContext } from "../bricks/context/ColorSchemaContext";
+
 //@@viewOff:imports
 //@@viewOn:constants
 
@@ -44,10 +47,10 @@ const years = {
   18: { label: "2018", pocet: 106498, narozeni: 114036, umrti: 112920 },
 };
 //@@viewOff:constants
-
 const Homework_part3 = createVisualComponent({
   //@@viewOn:statics
   displayName: Config.TAG + "Homework_part3",
+
   //@@viewOff:statics
   //@@viewOn:propTypes
   propTypes: {},
@@ -61,6 +64,7 @@ const Homework_part3 = createVisualComponent({
     //@@viewOn:private
     const [inputYear, setYear] = useState(1);
     const [chartData, setChartData] = useState([years[22]]);
+    const { colorSchema } = useContext(ColorSchemaContext);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -85,7 +89,7 @@ const Homework_part3 = createVisualComponent({
     }
 
     return (
-      <div>
+      <>
         <RouteBar />
         <h1 className={h1()}>Statistiky obyvatelstva v ČR za {yearTextFormatter(inputYear)}</h1>
         <UU5.Bricks.Row>
@@ -93,7 +97,13 @@ const Homework_part3 = createVisualComponent({
             <h2 className={h2()}>Roky:</h2>
           </UU5.Bricks.Column>
           <UU5.Bricks.Column colWidth="xl-7">
-            <UU5.Bricks.ButtonGroup elevation={5} baseline={true} borderRadius="12px" colorSchema="green" size="xl">
+            <UU5.Bricks.ButtonGroup
+              elevation={5}
+              baseline={true}
+              borderRadius="12px"
+              colorSchema={colorSchema}
+              size="xl"
+            >
               <UU5.Bricks.Button content="1" onClick={() => processChartData(1)} />
               <UU5.Bricks.Button content="2" onClick={() => processChartData(2)} />
               <UU5.Bricks.Button content="3" onClick={() => processChartData(3)} />
@@ -103,7 +113,7 @@ const Homework_part3 = createVisualComponent({
           </UU5.Bricks.Column>
         </UU5.Bricks.Row>
         <Chart dataDtoIn={chartData} seriesDtoIn={chartSeries["series"]} />
-      </div>
+      </>
     );
 
     //@@viewOff:render

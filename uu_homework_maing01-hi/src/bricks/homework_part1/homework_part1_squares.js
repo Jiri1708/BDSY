@@ -1,8 +1,9 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createVisualComponent } from "uu5g04-hooks";
+import { createVisualComponent, useContext } from "uu5g04-hooks";
 import Config from "../config/config";
 import CSS from "./homework_part1_squares.css";
+import { ColorSchemaContext } from "../context/ColorSchemaContext";
 //@@viewOff:imports
 
 const Square = createVisualComponent({
@@ -30,9 +31,9 @@ const Square = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:render
-
+const { colorSchema } = useContext(ColorSchemaContext);
     return (
-      <UU5.Bricks.Card className={CSS.main()}>
+      <UU5.Bricks.Card className={CSS.main()} colorSchema={colorSchema}>
         <UU5.Bricks.Row>{square.text}</UU5.Bricks.Row>
         <UU5.Bricks.Row>
           {square.amount}
