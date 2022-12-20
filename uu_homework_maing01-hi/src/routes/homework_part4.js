@@ -34,20 +34,25 @@ const Homework_part4 = createVisualComponent({
 
     const { colorSchema } = useContext(ColorSchemaContext);
     const [carMaker, setCarMaker] = useState();
+    const [maker, setMaker] = useState();
     const audi = ["A1", "A3", "A4", "A5", "A8"];
     const bmw = ["1", "3", "4", "5", "7"];
     const vw = ["Polo", "Golf", "Arteon", "Passat", "Tiguan"];
     function handleClick(e) {
-      
-      switch (e) {
+      setMaker(e.value)
+      switch (e.value) {
         case "Audi":
-          setCarMaker(audi.map((audi) => <UU5.Forms.Select.Option value={audi}></UU5.Forms.Select.Option>));
+          setCarMaker(
+            audi.map((audi) => <UU5.Forms.Select.Option value={audi} key={Math.random()}></UU5.Forms.Select.Option>)
+          );
           break;
         case "BMW":
-         setCarMaker(bmw.map((bmw) => <UU5.Forms.Select.Option value={bmw}></UU5.Forms.Select.Option>));
+         setCarMaker(
+           bmw.map((bmw) => <UU5.Forms.Select.Option value={bmw} key={Math.random()}></UU5.Forms.Select.Option>)
+         );
           break;
         case "VW":
-          setCarMaker(vw.map((vw) => <UU5.Forms.Select.Option value={vw}></UU5.Forms.Select.Option>));
+          setCarMaker(vw.map((vw) => <UU5.Forms.Select.Option value={vw} key={Math.random()}></UU5.Forms.Select.Option>));
           break;
         default:
           setCarMaker();
@@ -81,15 +86,13 @@ const Homework_part4 = createVisualComponent({
             { label: "Elektro", name: "electric" },
           ]}
         />
-        <UU5.Forms.Select label="Značka" onChange={(e) => handleClick(e.value)}>
+        <UU5.Forms.Select label="Značka" value={maker} onChange={(e) => handleClick(e)}>
           <UU5.Forms.Select.Option value="Audi" />
           <UU5.Forms.Select.Option value="BMW" />
           <UU5.Forms.Select.Option value="VW" />
         </UU5.Forms.Select>
 
-        <UU5.Forms.Select label="Model">
-          {carMaker}
-        </UU5.Forms.Select>
+        <UU5.Forms.Select label="Model">{carMaker}</UU5.Forms.Select>
 
         <UU5.Forms.Select label="Cena">
           <UU5.Forms.Select.Option value="0" content="do 100 tis. Kč" />
