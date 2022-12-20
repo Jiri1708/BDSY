@@ -6,7 +6,6 @@ import UU5 from "uu5g04";
 import "uu5g04-bricks";
 import "uu5g04-forms";
 import Chart from "../bricks/homework_part3/homework_part3_charts";
-import { ColorSchemaProvider } from "../bricks/context/ColorSchemaContext";
 import { ColorSchemaContext } from "../bricks/context/ColorSchemaContext";
 
 //@@viewOff:imports

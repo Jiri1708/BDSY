@@ -5,7 +5,7 @@ import "uu5g04-bricks";
 import "uu5chartg01";
 import CSS from "./homework_part1_charts.css";
 import { ColorSchemaContext } from "../context/ColorSchemaContext";
-import { ColorSchemaChanger } from "../homework_part4/homework_part4_switch";
+import { ColorSchemaChanger } from "../homework_part5/homework_part5_switch";
 //@@viewOff:imports
 
 //@@viewOn:constants

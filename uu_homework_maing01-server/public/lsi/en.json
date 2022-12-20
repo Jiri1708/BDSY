@@ -31,6 +31,10 @@
   },
   "Menu": {
     "home": "Welcome",
-    "about": "About Application"
+    "about": "About Application",
+    "homework_part1": "HomeWork 1",
+    "homework_part2": "HomeWork 2",
+    "homework_part3": "HomeWork 3",
+    "homework_part4": "HomeWork 4"
   }
 }
