@@ -16,9 +16,9 @@ const Bazar = createVisualComponentWithRef({
   render() {
     //@@viewOn:hooks
  const { colorSchema } = useContext(ColorSchemaContext);
-    const detailRef = useRef();
+    const modalRef = useRef();
     function openFilter() {
-      detailRef.current.open();
+      modalRef.current.open();
     }
     //@@viewOff:hooks
 
@@ -26,8 +26,7 @@ const Bazar = createVisualComponentWithRef({
     //@@viewOff:private
 
     //@@viewOn:render
-    return(
-
+    return (
       <>
         <RouteBar />
         <ColorSchemaChanger />
@@ -35,10 +34,10 @@ const Bazar = createVisualComponentWithRef({
         <UU5.Bricks.Button colorSchema={colorSchema} onClick={openFilter}>
           <UU5.Bricks.Icon></UU5.Bricks.Icon>
         </UU5.Bricks.Button>
-        <Modal ref={detailRef} />
+        <Modal ref={modalRef} />
       </>
       //@@viewOff:render
-    )
+    );
   },
 });
 
