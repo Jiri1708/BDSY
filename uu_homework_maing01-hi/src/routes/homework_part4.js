@@ -6,6 +6,8 @@ import Modal from "../bricks/homework_part4/homework_part4_modal";
 import RouteBar from "../core/route-bar";
 import { ColorSchemaChanger } from "../bricks/homework_part5/homework_part5_switch";
 import { ColorSchemaContext } from "../bricks/context/ColorSchemaContext";
+import VehicleProvider from "../bricks/homework_part4/homework_part4_vehicle-provider";
+import VehicleList from "../bricks/homework_part4/homework_part4_vehicle-list";
 //@@viewOff:imports
 
 const Bazar = createVisualComponentWithRef({
@@ -35,6 +37,15 @@ const Bazar = createVisualComponentWithRef({
           <UU5.Bricks.Icon></UU5.Bricks.Icon>
         </UU5.Bricks.Button>
         <Modal ref={modalRef} />
+        <VehicleProvider>
+          {({ vehicles }) => {
+            return (
+              <>
+                <VehicleList vehicles={vehicles}/>
+              </>
+            );
+          }}
+        </VehicleProvider>
       </>
       //@@viewOff:render
     );
