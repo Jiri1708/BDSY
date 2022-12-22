@@ -1,7 +1,8 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createComponent, useState } from "uu5g04-hooks";
+import { createComponent, useState, useContext } from "uu5g04-hooks";
 import Config from "../config/config";
+import { FilterContext } from "../context/FilterContext";
 //@@viewOff:imports
 
 let initVehicles = [
@@ -11,6 +12,7 @@ let initVehicles = [
     model: "A4",
     driveTrain: "diesel",
     price: 200000,
+    mileage: 2000000,
   },
   {
     id: 2,
@@ -18,6 +20,7 @@ let initVehicles = [
     model: "A5",
     driveTrain: "petrol",
     price: 290000,
+    mileage: 2000000,
   },
   {
     id: 3,
@@ -25,6 +28,7 @@ let initVehicles = [
     model: "A3",
     driveTrain: "electric",
     price: 100000,
+    mileage: 2000000,
   },
   {
     id: 4,
@@ -32,6 +36,7 @@ let initVehicles = [
     model: "A5",
     driveTrain: "electric",
     price: 300000,
+    mileage: 2000000,
   },
   {
     id: 5,
@@ -39,6 +44,7 @@ let initVehicles = [
     model: "4",
     driveTrain: "electric",
     price: 200000,
+    mileage: 300000,
   },
   {
     id: 6,
@@ -46,6 +52,7 @@ let initVehicles = [
     model: "2",
     driveTrain: "electric",
     price: 220000,
+    mileage: 0,
   },
   {
     id: 7,
@@ -53,6 +60,7 @@ let initVehicles = [
     model: "2",
     driveTrain: "petrol",
     price: 220000,
+    mileage: 150000,
   },
   {
     id: 8,
@@ -60,6 +68,7 @@ let initVehicles = [
     model: "Arteon",
     driveTrain: "electric",
     price: 220000,
+    mileage: 10000,
   },
   {
     id: 9,
@@ -67,14 +76,16 @@ let initVehicles = [
     model: "Golf",
     driveTrain: "petrol",
     price: 10000,
+    mileage: 20000,
   },
   {
-    id: 9,
+    id: 10,
     carMaker: "VW",
     model: "Passat",
     driveTrain: "diesel",
     price: 20000,
-  }
+    mileage: 2000000,
+  },
 ];
 
 const VehicleProvider = createComponent({
@@ -85,16 +96,13 @@ const VehicleProvider = createComponent({
   render({ children }) {
     //@@viewOn:private
     const [vehicles, setVehicles] = useState(initVehicles);
-
-  
-
-  
-
+    const { filter } = useContext(FilterContext);
     //@@viewOff:private
-
+   
     //@@viewOn:render
 
-    return children({ vehicles });
+    return children(
+    {vehicles});
     //@@viewOff:render
   },
 });

@@ -8,6 +8,7 @@ import { ColorSchemaChanger } from "../bricks/homework_part5/homework_part5_swit
 import { ColorSchemaContext } from "../bricks/context/ColorSchemaContext";
 import VehicleProvider from "../bricks/homework_part4/homework_part4_vehicle-provider";
 import VehicleList from "../bricks/homework_part4/homework_part4_vehicle-list";
+import { FilterProvider } from "../bricks/context/FilterContext";
 //@@viewOff:imports
 
 const Bazar = createVisualComponentWithRef({
@@ -17,7 +18,7 @@ const Bazar = createVisualComponentWithRef({
 
   render() {
     //@@viewOn:hooks
- const { colorSchema } = useContext(ColorSchemaContext);
+    const { colorSchema } = useContext(ColorSchemaContext);
     const modalRef = useRef();
     function openFilter() {
       modalRef.current.open();
@@ -33,19 +34,21 @@ const Bazar = createVisualComponentWithRef({
         <RouteBar />
         <ColorSchemaChanger />
         <h1>Bazar</h1>
-        <UU5.Bricks.Button colorSchema={colorSchema} onClick={openFilter}>
-          <UU5.Bricks.Icon></UU5.Bricks.Icon>
-        </UU5.Bricks.Button>
-        <Modal ref={modalRef} />
-        <VehicleProvider>
-          {({ vehicles }) => {
-            return (
-              <>
-                <VehicleList vehicles={vehicles}/>
-              </>
-            );
-          }}
-        </VehicleProvider>
+        <FilterProvider>
+          <UU5.Bricks.Button colorSchema={colorSchema} onClick={openFilter}>
+            <UU5.Bricks.Icon></UU5.Bricks.Icon>
+          </UU5.Bricks.Button>
+          <Modal ref={modalRef} />
+          <VehicleProvider>
+            {({ vehicles }) => {
+              return (
+                <>
+                  <VehicleList vehicles={vehicles} />
+                </>
+              );
+            }}
+          </VehicleProvider>
+        </FilterProvider>
       </>
       //@@viewOff:render
     );

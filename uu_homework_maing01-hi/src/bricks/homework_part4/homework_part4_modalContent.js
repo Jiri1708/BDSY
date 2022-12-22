@@ -1,8 +1,9 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createVisualComponent, useState } from "uu5g04-hooks";
+import { createVisualComponent, useState, useRef, useContext } from "uu5g04-hooks";
 
 import Config from "../config/config";
+import { FilterContext } from "../context/FilterContext";
 //@@viewOff:imports
 
 const ModalContent = createVisualComponent({
@@ -25,6 +26,11 @@ const ModalContent = createVisualComponent({
     //@@viewOff:hooks
 
     //@@viewOn:private
+    const mileageRef = useRef(null);
+    const driveTrainRef = useRef(null);
+    const priceRef = useRef(null);
+    const makerRef = useRef(null);
+    const modelRef = useRef(null);
     const [carMaker, setCarMaker] = useState();
     const [mileage, setMileage] = useState();
     const [price, setPrice] = useState();
@@ -62,12 +68,27 @@ const ModalContent = createVisualComponent({
       }
       setModel();
     }
+
+    
+    const { filter, setFilter } = useContext(FilterContext);
+    const handleClick = () => {
+      // alert(e.value)
+      setFilter([{ carMaker, model, price, mileage }]);
+    };
+    //  return (
+    //    <UU5.Forms.Select value={colorSchema} onChange={(e) => handleClick(e)}>
+    //      <UU5.Forms.Select.Option value="blue" />
+    //      <UU5.Forms.Select.Option value="red" />
+    //      <UU5.Forms.Select.Option value="green" />
+    //    </UU5.Forms.Select>
+    //  );
     //@@viewOff:private
 
     //@@viewOn:render
     return (
       <>
         <UU5.Forms.Radios
+          ref={driveTrainRef}
           label="Palivo"
           size="m"
           value={[
@@ -76,26 +97,27 @@ const ModalContent = createVisualComponent({
             { label: "Elektro", name: "electric" },
           ]}
         />
-        <UU5.Forms.Select label="Značka" value={maker} onChange={(e) => handleClickCarMaker(e)}>
+        <UU5.Forms.Select ref={makerRef} label="Značka" value={maker} onChange={(e) => handleClickCarMaker(e)}>
           <UU5.Forms.Select.Option value="Audi" />
           <UU5.Forms.Select.Option value="BMW" />
           <UU5.Forms.Select.Option value="VW" />
         </UU5.Forms.Select>
 
-        <UU5.Forms.Select label="Model" value={model} onChange={(e) => handleClickModel(e)}>
+        <UU5.Forms.Select ref={modelRef} label="Model" value={model} onChange={(e) => handleClickModel(e)}>
           {carMaker}
         </UU5.Forms.Select>
 
-        <UU5.Forms.Select label="Cena" value={price} onChange={(e) => handleClickPrice(e)}>
+        <UU5.Forms.Select ref={priceRef} label="Cena" value={price} onChange={(e) => handleClickPrice(e)}>
           <UU5.Forms.Select.Option value="0" content="do 100 tis. Kč" />
           <UU5.Forms.Select.Option value="1" content="100 tis. - 250 tis. Kč" />
           <UU5.Forms.Select.Option value="2" content="250 tis. Kč +" />
         </UU5.Forms.Select>
-        <UU5.Forms.Select label="Nájezd" value={mileage} onChange={(e) => handleClickMileage(e)}>
+        <UU5.Forms.Select ref={mileageRef} label="Nájezd" value={mileage} onChange={(e) => handleClickMileage(e)}>
           <UU5.Forms.Select.Option value="0" content="do 50 tis. km" />
           <UU5.Forms.Select.Option value="1" content="50 tis. - 100 tis. km" />
           <UU5.Forms.Select.Option value="2" content="100 tis. km +" />
         </UU5.Forms.Select>
+        <UU5.Bricks.Button onClick={handleClick}>Test</UU5.Bricks.Button>
       </>
     );
     //@@viewOff:render
