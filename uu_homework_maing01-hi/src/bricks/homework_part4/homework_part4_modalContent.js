@@ -30,7 +30,6 @@ const ModalContent = createVisualComponent({
     const [price, setPrice] = useState();
     const [maker, setMaker] = useState();
     const [model, setModel] = useState();
-    const [driveTrain, setDriveTrain] = useState();
     const audi = ["A1", "A3", "A4", "A5", "A8"];
     const bmw = ["1", "3", "4", "5", "7"];
     const vw = ["Polo", "Golf", "Arteon", "Passat", "Tiguan"];
