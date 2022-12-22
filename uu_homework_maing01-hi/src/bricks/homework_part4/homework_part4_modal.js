@@ -10,7 +10,7 @@ const Modal = createVisualComponentWithRef({
   displayName: Config.TAG + "Bazar",
   //@@viewOff:statics
 
-  render(props, ref) {
+  render(ref) {
     //@@viewOn:hooks
     const modalRef = useRef();
 
