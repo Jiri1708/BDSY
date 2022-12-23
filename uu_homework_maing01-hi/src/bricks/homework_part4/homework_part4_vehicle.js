@@ -57,7 +57,7 @@ const Vehicle = createVisualComponent({
       >
         Cena: <div>{vehicle.price}</div>
         Pohon: <div>{vehicle.driveTrain}</div>
-       
+        Najezd: <div>{vehicle.mileage}</div>
       </UU5.Bricks.Card>
       // </div>
     );

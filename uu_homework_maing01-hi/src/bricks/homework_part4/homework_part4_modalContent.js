@@ -69,19 +69,51 @@ const ModalContent = createVisualComponent({
       setModel();
     }
 
-    
-    const { filter, setFilter } = useContext(FilterContext);
-    const handleClick = () => {
+    const { initVehicles, vehicles, setVehicles } = useContext(FilterContext);
+    function handleClickFilter() {
       // alert(e.value)
-      setFilter([{ carMaker, model, price, mileage }]);
+      let filteredVehicles = initVehicles;
+      console.log(maker);
+      if (maker) filteredVehicles = filteredVehicles.filter((x) => x.carMaker == maker);
+      if (model) filteredVehicles = filteredVehicles.filter((x) => x.model == model);
+      switch (price) {
+        case "0":
+          filteredVehicles = filteredVehicles.filter((x) => x.price < 100000);
+          break;
+        case "1":
+          filteredVehicles = filteredVehicles.filter((x) => x.price > 100000 && x.price < 250000);
+          break;
+        case "2":
+          filteredVehicles = filteredVehicles.filter((x) => x.price >= 250000);
+          break;
+        default:
+          break;
+      }
+      switch (mileage) {
+        case "0":
+          filteredVehicles = filteredVehicles.filter((x) => x.mileage < 50000);
+          break;
+        case "1":
+          filteredVehicles = filteredVehicles.filter((x) => x.mileage > 50000 && x.mileage < 100000);
+          break;
+        case "2":
+          filteredVehicles = filteredVehicles.filter((x) => x.mileage >= 100000);
+          break;
+        default:
+          break;
+      }
+
+      setVehicles(filteredVehicles);
+    }
+
+    const handleClickReset = () => {
+      setMaker();
+      setModel();
+      setMileage();
+      setPrice();
+      setVehicles(initVehicles);
     };
-    //  return (
-    //    <UU5.Forms.Select value={colorSchema} onChange={(e) => handleClick(e)}>
-    //      <UU5.Forms.Select.Option value="blue" />
-    //      <UU5.Forms.Select.Option value="red" />
-    //      <UU5.Forms.Select.Option value="green" />
-    //    </UU5.Forms.Select>
-    //  );
+
     //@@viewOff:private
 
     //@@viewOn:render
@@ -117,7 +149,8 @@ const ModalContent = createVisualComponent({
           <UU5.Forms.Select.Option value="1" content="50 tis. - 100 tis. km" />
           <UU5.Forms.Select.Option value="2" content="100 tis. km +" />
         </UU5.Forms.Select>
-        <UU5.Bricks.Button onClick={handleClick}>Test</UU5.Bricks.Button>
+        <UU5.Bricks.Button onClick={handleClickFilter}>Filtr</UU5.Bricks.Button>
+        <UU5.Bricks.Button onClick={handleClickReset}>Reset Filtr</UU5.Bricks.Button>
       </>
     );
     //@@viewOff:render
