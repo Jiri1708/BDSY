@@ -31,6 +31,7 @@ const ModalContent = createVisualComponent({
     const priceRef = useRef(null);
     const makerRef = useRef(null);
     const modelRef = useRef(null);
+    const [driveTrain, setDriveTrain] = useState();
     const [carMaker, setCarMaker] = useState();
     const [mileage, setMileage] = useState();
     const [price, setPrice] = useState();
@@ -76,12 +77,13 @@ const ModalContent = createVisualComponent({
       console.log(maker);
       if (maker) filteredVehicles = filteredVehicles.filter((x) => x.carMaker == maker);
       if (model) filteredVehicles = filteredVehicles.filter((x) => x.model == model);
+       if (driveTrain) filteredVehicles = filteredVehicles.filter((x) => x.driveTrain == driveTrain);
       switch (price) {
         case "0":
           filteredVehicles = filteredVehicles.filter((x) => x.price < 100000);
           break;
         case "1":
-          filteredVehicles = filteredVehicles.filter((x) => x.price > 100000 && x.price < 250000);
+          filteredVehicles = filteredVehicles.filter((x) => x.price >= 100000 && x.price < 250000);
           break;
         case "2":
           filteredVehicles = filteredVehicles.filter((x) => x.price >= 250000);
@@ -94,7 +96,7 @@ const ModalContent = createVisualComponent({
           filteredVehicles = filteredVehicles.filter((x) => x.mileage < 50000);
           break;
         case "1":
-          filteredVehicles = filteredVehicles.filter((x) => x.mileage > 50000 && x.mileage < 100000);
+          filteredVehicles = filteredVehicles.filter((x) => x.mileage >= 50000 && x.mileage < 100000);
           break;
         case "2":
           filteredVehicles = filteredVehicles.filter((x) => x.mileage >= 100000);
@@ -102,6 +104,7 @@ const ModalContent = createVisualComponent({
         default:
           break;
       }
+
 
       setVehicles(filteredVehicles);
     }
@@ -111,8 +114,25 @@ const ModalContent = createVisualComponent({
       setModel();
       setMileage();
       setPrice();
+      setDriveTrain();
       setVehicles(initVehicles);
     };
+
+    const handleChangeRadio = (e) => setDriveTrain(e)
+
+    function renderRadios()
+    {
+      let radios = [
+        { label: "Benzin", name: "petrol", value: false },
+        { label: "Diesel", name: "diesel" , value: false},
+        { label: "Elektro", name: "electric" , value: false},
+      ]; 
+      for (let index = 0; index < radios.length; index++) {
+        const element = radios[index];
+        element.value = element.name == driveTrain? true: false
+      }
+      return radios
+    }
 
     //@@viewOff:private
 
@@ -120,14 +140,10 @@ const ModalContent = createVisualComponent({
     return (
       <>
         <UU5.Forms.Radios
-          ref={driveTrainRef}
+          onChange={(e) => handleChangeRadio(e.value)}
           label="Palivo"
           size="m"
-          value={[
-            { label: "Benzin", name: "petrol", value: true },
-            { label: "Diesel", name: "diesel" },
-            { label: "Elektro", name: "electric" },
-          ]}
+          value={renderRadios()}
         />
         <UU5.Forms.Select ref={makerRef} label="Značka" value={maker} onChange={(e) => handleClickCarMaker(e)}>
           <UU5.Forms.Select.Option value="Audi" />
