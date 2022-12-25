@@ -8,7 +8,7 @@ let initVehicles = [
     model: "A4",
     driveTrain: "diesel",
     price: 200000,
-    mileage: 2000000,
+    mileage: 200000,
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ let initVehicles = [
     model: "A5",
     driveTrain: "petrol",
     price: 290000,
-    mileage: 2000000,
+    mileage: 200000,
   },
   {
     id: 3,
@@ -24,15 +24,15 @@ let initVehicles = [
     model: "A3",
     driveTrain: "electric",
     price: 100000,
-    mileage: 2000000,
+    mileage: 1500000,
   },
   {
     id: 4,
     carMaker: "Audi",
     model: "A5",
     driveTrain: "electric",
-    price: 300000,
-    mileage: 2000000,
+    price: 120000,
+    mileage: 100000,
   },
   {
     id: 5,
@@ -40,14 +40,14 @@ let initVehicles = [
     model: "4",
     driveTrain: "electric",
     price: 200000,
-    mileage: 300000,
+    mileage: 90000,
   },
   {
     id: 6,
     carMaker: "BMW",
     model: "2",
     driveTrain: "electric",
-    price: 220000,
+    price: 20000,
     mileage: 0,
   },
   {
@@ -80,7 +80,7 @@ let initVehicles = [
     model: "Passat",
     driveTrain: "diesel",
     price: 20000,
-    mileage: 2000000,
+    mileage: 200000,
   },
 ];
 function FilterProvider(props){

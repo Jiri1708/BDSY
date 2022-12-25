@@ -37,6 +37,10 @@ const ModalContent = createVisualComponent({
     const [price, setPrice] = useState();
     const [maker, setMaker] = useState();
     const [model, setModel] = useState();
+    const [mileageFrom, setMileageFrom] = useState(0);
+    const [mileageTo, setMileageTo] = useState(200000);
+    const [priceFrom, setPriceFrom] = useState(0);
+    const [priceTo, setPriceTo] = useState(500000);
     const audi = ["A1", "A3", "A4", "A5", "A8"];
     const bmw = ["1", "3", "4", "5", "7"];
     const vw = ["Polo", "Golf", "Arteon", "Passat", "Tiguan"];
@@ -44,6 +48,10 @@ const ModalContent = createVisualComponent({
     const handleClickPrice = (e) => setPrice(e.value);
     const handleClickMileage = (e) => setMileage(e.value);
     const handleClickModel = (e) => setModel(e.value);
+    const handleClickMileageFrom = (e) => setMileageFrom(e.value);
+    const handleClickMileageTo = (e) => setMileageTo(e.value);
+    const handleClickPriceFrom = (e) => setPriceFrom(e.value);
+    const handleClickPriceTo = (e) => setPriceTo(e.value);
 
     function handleClickCarMaker(e) {
       setMaker(e.value);
@@ -77,7 +85,7 @@ const ModalContent = createVisualComponent({
       console.log(maker);
       if (maker) filteredVehicles = filteredVehicles.filter((x) => x.carMaker == maker);
       if (model) filteredVehicles = filteredVehicles.filter((x) => x.model == model);
-       if (driveTrain) filteredVehicles = filteredVehicles.filter((x) => x.driveTrain == driveTrain);
+      if (driveTrain) filteredVehicles = filteredVehicles.filter((x) => x.driveTrain == driveTrain);
       switch (price) {
         case "0":
           filteredVehicles = filteredVehicles.filter((x) => x.price < 100000);
@@ -91,6 +99,11 @@ const ModalContent = createVisualComponent({
         default:
           break;
       }
+      if (mileageFrom) filteredVehicles = filteredVehicles.filter((x) => x.mileage >= mileageFrom);
+      if (mileageTo) filteredVehicles = filteredVehicles.filter((x) => x.mileage <= mileageTo);
+      if (priceFrom) filteredVehicles = filteredVehicles.filter((x) => x.price >= priceFrom);
+      if (priceTo) filteredVehicles = filteredVehicles.filter((x) => x.price <= priceTo);
+
       switch (mileage) {
         case "0":
           filteredVehicles = filteredVehicles.filter((x) => x.mileage < 50000);
@@ -105,7 +118,6 @@ const ModalContent = createVisualComponent({
           break;
       }
 
-
       setVehicles(filteredVehicles);
     }
 
@@ -115,23 +127,24 @@ const ModalContent = createVisualComponent({
       setMileage();
       setPrice();
       setDriveTrain();
+      setMileageFrom(0);
+      setMileageTo(200000);
       setVehicles(initVehicles);
     };
 
-    const handleChangeRadio = (e) => setDriveTrain(e)
+    const handleChangeRadio = (e) => setDriveTrain(e);
 
-    function renderRadios()
-    {
+    function renderRadios() {
       let radios = [
         { label: "Benzin", name: "petrol", value: false },
-        { label: "Diesel", name: "diesel" , value: false},
-        { label: "Elektro", name: "electric" , value: false},
-      ]; 
+        { label: "Diesel", name: "diesel", value: false },
+        { label: "Elektro", name: "electric", value: false },
+      ];
       for (let index = 0; index < radios.length; index++) {
         const element = radios[index];
-        element.value = element.name == driveTrain? true: false
+        element.value = element.name == driveTrain ? true : false;
       }
-      return radios
+      return radios;
     }
 
     //@@viewOff:private
@@ -139,12 +152,7 @@ const ModalContent = createVisualComponent({
     //@@viewOn:render
     return (
       <>
-        <UU5.Forms.Radios
-          onChange={(e) => handleChangeRadio(e.value)}
-          label="Palivo"
-          size="m"
-          value={renderRadios()}
-        />
+        <UU5.Forms.Radios onChange={(e) => handleChangeRadio(e.value)} label="Palivo" size="m" value={renderRadios()} />
         <UU5.Forms.Select ref={makerRef} label="Značka" value={maker} onChange={(e) => handleClickCarMaker(e)}>
           <UU5.Forms.Select.Option value="Audi" />
           <UU5.Forms.Select.Option value="BMW" />
@@ -160,11 +168,43 @@ const ModalContent = createVisualComponent({
           <UU5.Forms.Select.Option value="1" content="100 tis. - 250 tis. Kč" />
           <UU5.Forms.Select.Option value="2" content="250 tis. Kč +" />
         </UU5.Forms.Select>
-        <UU5.Forms.Select ref={mileageRef} label="Nájezd" value={mileage} onChange={(e) => handleClickMileage(e)}>
+        {/* <UU5.Forms.Select ref={mileageRef} label="Nájezd" value={mileage} onChange={(e) => handleClickMileage(e)}>
           <UU5.Forms.Select.Option value="0" content="do 50 tis. km" />
           <UU5.Forms.Select.Option value="1" content="50 tis. - 100 tis. km" />
           <UU5.Forms.Select.Option value="2" content="100 tis. km +" />
-        </UU5.Forms.Select>
+        </UU5.Forms.Select> */}
+        <UU5.Forms.Slider
+          step={25000}
+          min={0}
+          max={mileageTo}
+          value={mileageFrom}
+          label="Nájezd od"
+          onChange={(e) => handleClickMileageFrom(e)}
+        ></UU5.Forms.Slider>
+        <UU5.Forms.Slider
+          step={25000}
+          min={mileageFrom}
+          max={200000}
+          label="Nájezd do"
+          value={mileageTo}
+          onChange={(e) => handleClickMileageTo(e)}
+        ></UU5.Forms.Slider>
+        <UU5.Forms.Slider
+          step={25000}
+          min={0}
+          max={priceTo}
+          value={priceFrom}
+          label="Cena od"
+          onChange={(e) => handleClickPriceFrom(e)}
+        ></UU5.Forms.Slider>
+        <UU5.Forms.Slider
+          step={25000}
+          min={priceFrom}
+          max={500000}
+          label="Cena do"
+          value={priceTo}
+          onChange={(e) => handleClickPriceTo(e)}
+        ></UU5.Forms.Slider>
         <UU5.Bricks.Button onClick={handleClickFilter}>Filtr</UU5.Bricks.Button>
         <UU5.Bricks.Button onClick={handleClickReset}>Reset Filtr</UU5.Bricks.Button>
       </>
