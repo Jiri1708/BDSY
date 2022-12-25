@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
 import { createVisualComponent, useState, useRef, useContext } from "uu5g04-hooks";
-
+import { ColorSchemaContext } from "../context/ColorSchemaContext";
 import Config from "../config/config";
 import { FilterContext } from "../context/FilterContext";
 //@@viewOff:imports
@@ -26,11 +26,7 @@ const ModalContent = createVisualComponent({
     //@@viewOff:hooks
 
     //@@viewOn:private
-    const mileageRef = useRef(null);
-    const driveTrainRef = useRef(null);
-    const priceRef = useRef(null);
-    const makerRef = useRef(null);
-    const modelRef = useRef(null);
+     const { colorSchema } = useContext(ColorSchemaContext);
     const [driveTrain, setDriveTrain] = useState();
     const [carMaker, setCarMaker] = useState();
     const [mileage, setMileage] = useState();
@@ -129,6 +125,8 @@ const ModalContent = createVisualComponent({
       setDriveTrain();
       setMileageFrom(0);
       setMileageTo(200000);
+      setPriceFrom(0);
+      setPriceTo(500000);
       setVehicles(initVehicles);
     };
 
@@ -152,28 +150,29 @@ const ModalContent = createVisualComponent({
     //@@viewOn:render
     return (
       <>
-        <UU5.Forms.Radios onChange={(e) => handleChangeRadio(e.value)} label="Palivo" size="m" value={renderRadios()} />
-        <UU5.Forms.Select ref={makerRef} label="Značka" value={maker} onChange={(e) => handleClickCarMaker(e)}>
+        <UU5.Forms.Radios
+          onChange={(e) => handleChangeRadio(e.value)}
+          label="Palivo"
+          colorSchema={colorSchema}
+          size="m"
+          value={renderRadios()}
+        />
+        <UU5.Forms.Select
+          label="Značka"
+          value={maker}
+          colorSchema={colorSchema}
+          onChange={(e) => handleClickCarMaker(e)}
+        >
           <UU5.Forms.Select.Option value="Audi" />
           <UU5.Forms.Select.Option value="BMW" />
           <UU5.Forms.Select.Option value="VW" />
         </UU5.Forms.Select>
 
-        <UU5.Forms.Select ref={modelRef} label="Model" value={model} onChange={(e) => handleClickModel(e)}>
+        <UU5.Forms.Select label="Model" value={model} colorSchema={colorSchema} onChange={(e) => handleClickModel(e)}>
           {carMaker}
         </UU5.Forms.Select>
-
-        <UU5.Forms.Select ref={priceRef} label="Cena" value={price} onChange={(e) => handleClickPrice(e)}>
-          <UU5.Forms.Select.Option value="0" content="do 100 tis. Kč" />
-          <UU5.Forms.Select.Option value="1" content="100 tis. - 250 tis. Kč" />
-          <UU5.Forms.Select.Option value="2" content="250 tis. Kč +" />
-        </UU5.Forms.Select>
-        {/* <UU5.Forms.Select ref={mileageRef} label="Nájezd" value={mileage} onChange={(e) => handleClickMileage(e)}>
-          <UU5.Forms.Select.Option value="0" content="do 50 tis. km" />
-          <UU5.Forms.Select.Option value="1" content="50 tis. - 100 tis. km" />
-          <UU5.Forms.Select.Option value="2" content="100 tis. km +" />
-        </UU5.Forms.Select> */}
         <UU5.Forms.Slider
+          colorSchema={colorSchema}
           step={25000}
           min={0}
           max={mileageTo}
@@ -182,6 +181,7 @@ const ModalContent = createVisualComponent({
           onChange={(e) => handleClickMileageFrom(e)}
         ></UU5.Forms.Slider>
         <UU5.Forms.Slider
+          colorSchema={colorSchema}
           step={25000}
           min={mileageFrom}
           max={200000}
@@ -190,6 +190,7 @@ const ModalContent = createVisualComponent({
           onChange={(e) => handleClickMileageTo(e)}
         ></UU5.Forms.Slider>
         <UU5.Forms.Slider
+          colorSchema={colorSchema}
           step={25000}
           min={0}
           max={priceTo}
@@ -198,6 +199,7 @@ const ModalContent = createVisualComponent({
           onChange={(e) => handleClickPriceFrom(e)}
         ></UU5.Forms.Slider>
         <UU5.Forms.Slider
+          colorSchema={colorSchema}
           step={25000}
           min={priceFrom}
           max={500000}
@@ -205,8 +207,15 @@ const ModalContent = createVisualComponent({
           value={priceTo}
           onChange={(e) => handleClickPriceTo(e)}
         ></UU5.Forms.Slider>
-        <UU5.Bricks.Button onClick={handleClickFilter}>Filtr</UU5.Bricks.Button>
-        <UU5.Bricks.Button onClick={handleClickReset}>Reset Filtr</UU5.Bricks.Button>
+        <UU5.Bricks.ButtonGroup>
+          <UU5.Bricks.Button colorSchema={colorSchema} onClick={handleClickFilter}>
+            <UU5.Bricks.Icon icon="mdi-magnify" /> Filtr
+          </UU5.Bricks.Button>
+          <UU5.Bricks.Button colorSchema={colorSchema} onClick={handleClickReset}>
+            <UU5.Bricks.Icon icon="uu5-cross" />
+            Reset Filtr
+          </UU5.Bricks.Button>
+        </UU5.Bricks.ButtonGroup>
       </>
     );
     //@@viewOff:render

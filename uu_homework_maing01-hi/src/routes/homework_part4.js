@@ -36,7 +36,7 @@ const Bazar = createVisualComponentWithRef({
         <h1>Bazar</h1>
         <FilterProvider>
           <UU5.Bricks.Button colorSchema={colorSchema} onClick={openFilter}>
-            <UU5.Bricks.Icon></UU5.Bricks.Icon>
+            <UU5.Bricks.Icon icon="mdi-magnify" /> Filtr
           </UU5.Bricks.Button>
           <Modal ref={modalRef} />
           <VehicleProvider>
