@@ -9,6 +9,7 @@ import Home from "../routes/home.js";
 import Homework_part1 from "../routes/homework_part1.js";
 import Homework_part2 from "../routes/homework_part2.js";
 import Homework_part3 from "../routes/homework_part3.js";
+import Homework_part4 from "../routes/homework_part4.js";
 import { ColorSchemaProvider } from "../bricks/context/ColorSchemaContext.js";
 
 //@@viewOff:imports
@@ -25,6 +26,7 @@ const ROUTE_MAP = {
   homework_part1: (props) => <Homework_part1 {...props} />,
   homework_part2: (props) => <Homework_part2 {...props} />,
   homework_part3: (props) => <Homework_part3 {...props} />,
+  homework_part4: (props) => <Homework_part4 {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

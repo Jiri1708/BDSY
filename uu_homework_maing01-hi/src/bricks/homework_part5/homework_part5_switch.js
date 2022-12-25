@@ -10,7 +10,7 @@ function ColorSchemaChanger(){
        setColorSchema(e.value)
     }
     return (
-      <UU5.Forms.Select value={colorSchema} onChange={(e) => handleClick(e)}>
+      <UU5.Forms.Select value={colorSchema} colorSchema={colorSchema} onChange={(e) => handleClick(e)}>
         <UU5.Forms.Select.Option value="blue" />
         <UU5.Forms.Select.Option value="red" />
         <UU5.Forms.Select.Option value="green" />
