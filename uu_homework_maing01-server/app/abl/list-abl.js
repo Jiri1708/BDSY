@@ -74,7 +74,7 @@ class ListAbl {
   //unit tests done
   async update(awid, dtoIn, session, authResult) {
     let validationResult = this.validator.validate("listUpdateDtoInType", dtoIn);
-
+ 
     let uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,

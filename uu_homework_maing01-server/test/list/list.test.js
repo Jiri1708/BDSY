@@ -13,7 +13,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await TestHelper.teardown();
 });
-
+//Done
 describe("Create LIST", () => {
   test("Happy Path - no products added", async () => {
     let dtoIn = {
@@ -99,6 +99,21 @@ describe("Update LIST", () => {
       } catch (error) {
         expect(error.message).toEqual("DtoIn is not valid.");
         expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative fail - list does not exist", async () => {
+      let dtoIn = {
+        id: "638a73ac24992c69821b987b",
+        name: "Test update",
+      };
+
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/update", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Specified ID does not exist");
+        expect(error.status).toEqual(404);
       }
     });
 });
@@ -193,40 +208,227 @@ describe("Update List's product", () => {
     let updateOfOneProduct = await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
 
     expect(updateOfOneProduct.data.productList.length).toEqual(dtoIn2.productList.length);
+  }),
+    test("Alternative fail - no product added to array", async () => {
+      let products = await TestHelper.executeGetCommand("product/get");
+      let dtoIn = {
+        name: "Alza 27.12",
+        productList: [],
+      };
+      for (let index = 0; index < products.data.itemList.length; index++) {
+        const element = products.data.itemList[index];
+        dtoIn.productList.push({
+          id: element.id,
+          quantity: Math.random() * 100,
+          purchased: false,
+        });
+      }
+      //vytvoreni listu s produkty
+      let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
 
-    // let result = await TestHelper.executePostCommand("list/updateProduct", dtoIn);
+      let dtoIn2 = {
+        id: listCreate.data.id,
+        productList: [],
+      };
 
-    // expect(result.status).toEqual(200);
-    // expect(result.data.uuAppErrorMap).toBeDefined();
-    // expect(result.data.name).toBe("Test1");
-  });
-  // ,
-  //   test("Alternative fail", async () => {
-  //     let dtoIn = {
-  //       name: "Test1",
-  //       ownerId: "3627-8321-1",
-  //       id: "445asd",
-  //     };
+      try {
+        await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
+      } catch (error) {
+        expect(error.message).toEqual("Update of products went wrong: Product not present");
+        expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative fail - product not linked", async () => {
+      let products = await TestHelper.executeGetCommand("product/get");
+      let dtoIn = {
+        name: "Alza 27.12",
+        productList: [],
+      };
+      for (let index = 0; index < products.data.itemList.length; index++) {
+        const element = products.data.itemList[index];
+        dtoIn.productList.push({
+          id: element.id,
+          quantity: Math.random() * 100,
+          purchased: false,
+        });
+      }
+      //vytvoreni listu s produkty
+      let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
 
-  //     try {
-  //       await TestHelper.executePostCommand("list/update", dtoIn);
-  //     } catch (error) {
-  //       expect(error.message).toEqual("Update of list failed");
-  //       expect(error.status).toEqual(400);
-  //     }
-  //   }),
-  //   test("Alternative fail - dtoIn", async () => {
-  //     let dtoIn = {};
+      let dtoIn2 = {
+        id: listCreate.data.id,
+        productList: [
+          {
+            id: "638a73ac24992c69821b987b",
+            quantity: Math.random() * 100,
+            purchased: false,
+          },
+        ],
+      };
 
-  //     expect.assertions(2);
+      try {
+        await TestHelper.executePostCommand("list/updateProduct", dtoIn2);
+      } catch (error) {
+        expect(error.message).toEqual("Update of products went wrong: Product not linked");
+        expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative fail - list does not exist", async () => {
+      let dtoIn = {
+        id: "638a73ac24992c69821b987b",
+        productList: [],
+      };
 
-  //     try {
-  //       await TestHelper.executePostCommand("list/update", dtoIn);
-  //     } catch (error) {
-  //       expect(error.message).toEqual("DtoIn is not valid.");
-  //       expect(error.status).toEqual(400);
-  //     }
-  //   });
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/updateProduct", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Specified ID does not exist");
+        expect(error.status).toEqual(404);
+      }
+    }),
+    test("Alternative fail - dtoIn", async () => {
+      let dtoIn = {};
+
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/updateProduct", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
+        expect(error.status).toEqual(400);
+      }
+    });
+});
+describe("Link products to List", () => {
+  test("Happy Path", async () => {
+    let products = await TestHelper.executeGetCommand("product/get");
+    let dtoIn = {
+      name: "Alza 27.12",
+      productList: [],
+    };
+    for (let index = 1; index < products.data.itemList.length; index++) {
+      const element = products.data.itemList[index];
+      dtoIn.productList.push({
+        id: element.id,
+        quantity: Math.random() * 100,
+        purchased: false,
+      });
+    }
+    //vytvoreni listu s produkty
+    let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
+
+    let dtoIn2 = {
+      id: listCreate.data.id,
+      productList: [
+        {
+          id: products.data.itemList[0].id,
+          quantity: Math.random() * 100,
+          purchased: false,
+        },
+      ],
+    };
+
+    let result = await TestHelper.executePostCommand("list/linkProduct", dtoIn2);
+
+    expect(result.status).toEqual(200);
+    expect(result.data.uuAppErrorMap).toBeDefined();
+
+   
+    expect(listCreate.data.productList.length).not.toEqual(result.productList.length);
+  }),
+    test("Alternative fail - no product added to array", async () => {
+      let products = await TestHelper.executeGetCommand("product/get");
+      let dtoIn = {
+        name: "Alza 27.12",
+        productList: [],
+      };
+      for (let index = 0; index < products.data.itemList.length; index++) {
+        const element = products.data.itemList[index];
+        dtoIn.productList.push({
+          id: element.id,
+          quantity: Math.random() * 100,
+          purchased: false,
+        });
+      }
+      //vytvoreni listu s produkty
+      let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
+
+      let dtoIn2 = {
+        id: listCreate.data.id,
+        productList: [{ id: "638a73ac24992c69821b987b", quantity: Math.random() * 100, purchased: false }],
+      };
+
+      try {
+        await TestHelper.executePostCommand("list/linkProduct", dtoIn2);
+      } catch (error) {
+        expect(error.message).toEqual("Update of products went wrong: Unknown productId");
+        expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative fail - product already linked", async () => {
+      let products = await TestHelper.executeGetCommand("product/get");
+      let dtoIn = {
+        name: "Alza 27.12",
+        productList: [],
+      };
+      for (let index = 0; index < products.data.itemList.length; index++) {
+        const element = products.data.itemList[index];
+        dtoIn.productList.push({
+          id: element.id,
+          quantity: Math.random() * 100,
+          purchased: false,
+        });
+      }
+      //vytvoreni listu s produkty
+      let listCreate = await TestHelper.executePostCommand("list/create", dtoIn);
+
+      let dtoIn2 = {
+        id: listCreate.data.id,
+        productList: [
+          {
+            id: products.data.itemList[0].id,
+            quantity: Math.random() * 100,
+            purchased: false,
+          },
+        ],
+      };
+
+      try {
+        await TestHelper.executePostCommand("list/linkProduct", dtoIn2);
+      } catch (error) {
+        expect(error.message).toEqual("Update of products went wrong: Product already linked");
+        expect(error.status).toEqual(400);
+      }
+    }),
+    test("Alternative fail - list does not exist", async () => {
+      let dtoIn = {
+        id: "638a73ac24992c69821b987b",
+        productList: [],
+      };
+
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/linkProduct", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("Specified ID does not exist");
+        expect(error.status).toEqual(404);
+      }
+    }),
+    test("Alternative fail - dtoIn", async () => {
+      let dtoIn = {};
+
+      expect.assertions(2);
+
+      try {
+        await TestHelper.executePostCommand("list/linkProduct", dtoIn);
+      } catch (error) {
+        expect(error.message).toEqual("DtoIn is not valid.");
+        expect(error.status).toEqual(400);
+      }
+    });
 });
 
 describe("Get LIST", () => {

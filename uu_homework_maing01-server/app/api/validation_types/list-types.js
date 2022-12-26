@@ -6,7 +6,7 @@ const listCreateDtoInType = shape({
     shape({
       id: id().isRequired(),
       quantity: number().isRequired(),
-    })
+    }) 
   ),
 });
 
@@ -45,6 +45,6 @@ const listUpdateProductDtoInType = shape({
       id: id().isRequired(),
       quantity: number().isRequired(),
       purchased: boolean().isRequired(),
-    })
+    }).isRequired()
   ).isRequired(),
 });
